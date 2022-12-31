@@ -1,0 +1,78 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border-spacing: 0;
+    font-family: "Raleway", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    width: 100vw;
+}
+
+nav {
+    font-weight: 800;
+}
+
+main {
+    width: 100%;
+    background-color: #004643;
+    color: #fffffe;
+}
+
+button {
+    background-color: #f9bc60;
+    color: #001e1d;
+    border-radius: 5px;
+    padding: 0 2px;
+    font-weight: 800;
+}
+
+.navbar {
+    background-color: #fffffe;
+}
+
+.clients--search {
+    width: 13rem;
+}
+
+.login-container {
+    min-height: 100vh;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    background: rgb(0, 70, 67);
+    background: radial-gradient(
+        circle,
+        rgba(0, 70, 67, 1) 0%,
+        rgba(0, 0, 0, 1) 100%,
+        rgba(2, 177, 232, 1) 100%,
+        rgba(3, 158, 220, 1) 100%,
+        rgba(4, 130, 202, 1) 100%,
+        rgba(9, 9, 121, 1) 100%,
+        rgba(5, 96, 179, 1) 100%,
+        rgba(0, 212, 255, 1) 100%
+    );
+}
+
+.login-container h1 {
+    text-align: center;
+    color: #fffffe;
+}
+
+.login-container .row {
+    border: 2px black solid;
+    background-color: #004643;
+    height: 200px;
+    width: 300px;
+    align-items: center;
+}
+
+.login-container button {
+    height: 50px;
+    color: #001e1d;
+}
