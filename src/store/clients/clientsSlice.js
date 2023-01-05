@@ -4,16 +4,16 @@ export const clientsSlice = createSlice({
     name: 'clients',
     initialState: {
         isLoadingClients: false,
-        clients: [],
+        registeredClients: [],
         activeClient: [],
     },
     reducers: {
-        increment: (state, /* action */ ) => {
-            state.counter += 1;
+        onAddNewClient: ( state, { payload } ) => {
+            state.registeredClients.push(payload);
         },
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { increment } = clientsSlice.actions;
+export const { onAddNewClient } = clientsSlice.actions;

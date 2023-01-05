@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        actualDate: null,
+        actualDate: new Date().toLocaleDateString(),
         isDatesModalOpen: false,
         isClientsModalOpen: false,
     },

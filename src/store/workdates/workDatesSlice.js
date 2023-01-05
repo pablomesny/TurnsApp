@@ -8,12 +8,15 @@ export const workDatesSlice = createSlice({
         activeDate: [],
     },
     reducers: {
-        increment: (state, /* action */ ) => {
-            state.counter += 1;
+        onAddNewDate: ( state, { payload } ) => {
+            state.dates.push( payload );
         },
-    }
+        setActiveDate: (state, { payload } ) => {
+            state.activeDate = payload;
+        }
+    },
 });
 
 
 // Action creators are generated for each case reducer function
-export const { increment } = workDatesSlice.actions;
+export const { onAddNewDate, setActiveDate } = workDatesSlice.actions;

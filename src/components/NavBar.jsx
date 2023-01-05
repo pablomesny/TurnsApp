@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import { logout } from '../store/auth/authSlice';
+import { startLogout } from '../store/auth/thunks';
 
 export const NavBar = () => {
 
@@ -8,7 +8,7 @@ export const NavBar = () => {
     const { displayName } = useSelector( state => state.auth );
 
     const onLogout = () => {
-        dispatch( logout() );
+        dispatch( startLogout() );
         localStorage.removeItem('auth');
     }
 

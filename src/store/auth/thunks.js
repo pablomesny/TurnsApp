@@ -1,11 +1,8 @@
-import { signInWithGoogle } from "../../firebase/providers";
+import { logoutFirebase, signInWithGoogle } from "../../firebase/providers";
 import { checkingCredentials, login, logout } from "./authSlice"
 
 export const startGoogleSignIn = () => {
-    console.log('test')
     return async( dispatch ) => {
-
-        console.log('googlesignin');
 
         dispatch( checkingCredentials() );
 
@@ -16,6 +13,15 @@ export const startGoogleSignIn = () => {
         dispatch( login( result ) );
 
         localStorage.setItem( 'auth', JSON.stringify(result) );
+
+    }
+}
+
+export const startLogout = () => {
+    return async( dispatch ) => {
+
+        await logoutFirebase();
+        dispatch( logout() );
 
     }
 }

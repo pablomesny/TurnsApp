@@ -3,12 +3,14 @@
     margin: 0;
     box-sizing: border-box;
     border-spacing: 0;
-    font-family: "Raleway", sans-serif;
 }
 
 body {
     min-height: 100vh;
     width: 100vw;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: #004643;
 }
 
 nav {
@@ -19,22 +21,30 @@ main {
     width: 100%;
     background-color: #004643;
     color: #fffffe;
+    min-width: 100%;
+    border-bottom: 4px solid black;
 }
 
 button {
     background-color: #f9bc60;
     color: #001e1d;
     border-radius: 5px;
-    padding: 0 2px;
+    padding: 4px;
     font-weight: 800;
+}
+
+textarea {
+    height: 2rem;
+}
+
+section {
+    max-width: 100%;
+    background-color: #004643;
+    color: #fffffe;
 }
 
 .navbar {
     background-color: #fffffe;
-}
-
-.clients--search {
-    width: 13rem;
 }
 
 .login-container {
@@ -75,4 +85,16 @@ button {
 .login-container button {
     height: 50px;
     color: #001e1d;
+}
+
+.form-description {
+    height: 10rem;
+}
+
+.btn-danger {
+    padding: 4px;
+}
+
+.date-search {
+    height: 36px;
 }
