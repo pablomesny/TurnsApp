@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 
-// TODO: Fix onchange
-
-export const SelectInputList = ({ onInputChange }) => {
+export const SelectInputList = ({ selectedClient = {}, onInputChange }) => {
 
     const { registeredClients } = useSelector( state => state.clients );
 
@@ -11,6 +9,7 @@ export const SelectInputList = ({ onInputChange }) => {
         className="form-control" 
         name="client"
         onChange={ onInputChange }
+        value={ !!selectedClient.uid ? JSON.stringify(selectedClient) : '' }
     >
         <option value="">Seleccione un cliente</option>
         {

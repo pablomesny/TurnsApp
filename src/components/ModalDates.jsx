@@ -68,12 +68,11 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
             return;
         }
 
-        console.log(datesFormValue)
-        console.log(datesFormValue.uid);
-
-        datesFormValue.uid 
-            ? dispatch( onUpdateWorkDate( datesFormValue ) ) 
-            : dispatch( onAddNewDate( onCreateDateUid() ) );
+        if(!!datesFormValue.uid) {
+            dispatch( onUpdateWorkDate( datesFormValue ) );
+        } else {
+            dispatch( onAddNewDate( onCreateDateUid() ) );
+        }
 
         dispatch( onResetActiveWorkDate());
         handleOpenModal();
@@ -132,7 +131,7 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
                         >
                             Cliente
                         </label>
-                        <SelectInputList onInputChange={ onInputChange } />
+                        <SelectInputList selectedClient={datesFormValue.client} onInputChange={ onInputChange } />
                     </div>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"

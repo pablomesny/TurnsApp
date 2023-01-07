@@ -1,6 +1,6 @@
 import { ModalDates } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
-import { login, onSetActualDate } from "../../store";
+import { login, onResetActiveWorkDate, onSetActualDate } from "../../store";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 
@@ -18,6 +18,7 @@ export const DatesPage = () => {
 
     const { actualDate } = useSelector((state) => state.ui);
     const { status } = useSelector( state => state.auth );
+    const { activeWorkDate } = useSelector( state => state.workDates );
 
     const [formValue, setFormValue] = useState({});
 
@@ -43,6 +44,7 @@ export const DatesPage = () => {
 
     const handleOpenModal = () => {
         setIsOpenModal( (prev) => !prev);
+        if( !!activeWorkDate.uid ) dispatch( onResetActiveWorkDate() );
     };
 
     return (

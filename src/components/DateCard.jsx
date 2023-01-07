@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { setActiveWorkDate } from "../store";
+import Swal from "sweetalert2";
+import { onDeleteWorkDate, setActiveWorkDate } from "../store";
 
 export const DateCard = ({ date, handleOpenModal }) => {
 
@@ -15,6 +16,21 @@ export const DateCard = ({ date, handleOpenModal }) => {
     const onModifyDate = () => {
         dispatch( setActiveWorkDate( date ));
         handleOpenModal();
+    }
+
+    const onDeleteDate = () => {
+        Swal.fire({
+            title: 'Eliminar turno',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch( onDeleteWorkDate( date ) );
+            }
+          })
     }
 
     return (
@@ -57,7 +73,7 @@ export const DateCard = ({ date, handleOpenModal }) => {
                             <button onClick={ onModifyDate }>Modificar</button>
                         </div>
                         <div className="col-12 d-flex justify-content-center">
-                            <button className="btn btn-danger">Borrar</button>
+                            <button onClick={ onDeleteDate } className="btn btn-danger">Borrar</button>
                         </div>
                     </div>
                 </div>
