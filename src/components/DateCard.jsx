@@ -1,9 +1,21 @@
-export const DateCard = ({ startDate, price, description, uid, client }) => {
+import { useDispatch } from "react-redux";
+import { setActiveWorkDate } from "../store";
+
+export const DateCard = ({ date, handleOpenModal }) => {
+
+    const { startDate, price, description, uid, client } = date;
+
+    const dispatch = useDispatch();
 
     const hourFromDate = startDate.split(" ")[4].slice(0, 5);
     const daysFromDate = new Date(startDate).toLocaleDateString();
 
     const { name, reference, telephoneNumber} = client;
+
+    const onModifyDate = () => {
+        dispatch( setActiveWorkDate( date ));
+        handleOpenModal();
+    }
 
     return (
         <section className="container pt-2 pb-2 mw-100">
@@ -42,7 +54,7 @@ export const DateCard = ({ startDate, price, description, uid, client }) => {
                     {/* BUTTONS ROW */}
                     <div className="row h-100 align-items-center">
                         <div className="col-12 d-flex justify-content-center">
-                            <button>Modificar</button>
+                            <button onClick={ onModifyDate }>Modificar</button>
                         </div>
                         <div className="col-12 d-flex justify-content-center">
                             <button className="btn btn-danger">Borrar</button>

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { DateCard } from "./DateCard";
 
-export const DateList = () => {
+export const DateList = ({handleOpenModal}) => {
 
     const { dates } = useSelector( state => state.workDates );
 
@@ -17,7 +17,8 @@ export const DateList = () => {
 
             <DateCard 
                 key={ date.uid }
-                {...date}
+                date={ date }
+                handleOpenModal={handleOpenModal}
             />
         ))}
     </>

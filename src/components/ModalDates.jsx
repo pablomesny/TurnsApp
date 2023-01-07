@@ -1,22 +1,22 @@
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { onAddNewDate } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { onAddNewDate, onResetActiveWorkDate, onUpdateWorkDate, setActiveWorkDate } from "../store";
 import DatePicker, { registerLocale } from "react-datepicker";
 import Swal from 'sweetalert2';
 import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 
 registerLocale("es", es);
 
-const initialState = {
+/* const initialState = {
     startDate: new Date(),
     client: '',
     price: '',
     description: '',
-}
+} */
 
 // TODO: CAMBIAR INPUT DE CLIENTE A SELECT Y AGREGAR UID DE CLIENTE (MOSTRAR OPTION DE NOMBRE DEL CLIENTE) || ACTIVEDATE DE REDUX STATE -----------------------------------------
 
@@ -24,7 +24,19 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
 
     const dispatch = useDispatch();
 
-    const [datesFormValue, setDatesFormValue] = useState(initialState);
+    const { activeWorkDate } = useSelector( state => state.workDates );
+
+    const [datesFormValue, setDatesFormValue] = useState(activeWorkDate);
+
+    useEffect(() => {
+      setDatesFormValue( activeWorkDate );
+    }, [activeWorkDate]);
+    
+
+    useEffect(() => {
+      dispatch(setActiveWorkDate( datesFormValue ));
+    }, [datesFormValue]);
+    
 
     const onDateInputChange = (e, name) => {
         setDatesFormValue({
@@ -56,12 +68,18 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
             return;
         }
 
-        dispatch( onAddNewDate( onCreateNewDate() ) );
-        setDatesFormValue(initialState);
+        console.log(datesFormValue)
+        console.log(datesFormValue.uid);
+
+        datesFormValue.uid 
+            ? dispatch( onUpdateWorkDate( datesFormValue ) ) 
+            : dispatch( onAddNewDate( onCreateDateUid() ) );
+
+        dispatch( onResetActiveWorkDate());
         handleOpenModal();
     }  
     
-    const onCreateNewDate = () => {
+    const onCreateDateUid = () => {
         return {
             ...datesFormValue,
             uid: new Date().getTime()

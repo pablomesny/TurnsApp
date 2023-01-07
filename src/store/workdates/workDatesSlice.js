@@ -5,18 +5,24 @@ export const workDatesSlice = createSlice({
     initialState: {
         isLoadingDates: false,
         dates: [],
-        activeDate: [],
+        activeWorkDate: {},
     },
     reducers: {
         onAddNewDate: ( state, { payload } ) => {
             state.dates.push( payload );
         },
-        setActiveDate: (state, { payload } ) => {
-            state.activeDate = payload;
+        onUpdateWorkDate: ( state, { payload } ) => {
+            state.dates = state.dates.filter( date => date.uid !== payload.uid ).push( payload );
+        },
+        setActiveWorkDate: (state, { payload } ) => {
+            state.activeWorkDate = payload;
+        },
+        onResetActiveWorkDate: ( state ) => {
+            state.activeWorkDate = {};
         }
     },
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onAddNewDate, setActiveDate } = workDatesSlice.actions;
+export const { onAddNewDate, setActiveWorkDate, onResetActiveWorkDate, onUpdateWorkDate } = workDatesSlice.actions;

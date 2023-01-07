@@ -11,6 +11,7 @@ import { DateList } from "../../components/DateList";
 registerLocale("es", es);
 
 export const DatesPage = () => {
+
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ export const DatesPage = () => {
     }, []);
 
     const handleOpenModal = () => {
-        setIsOpenModal((prev) => !prev);
+        setIsOpenModal( (prev) => !prev);
     };
 
     return (
@@ -98,7 +99,9 @@ export const DatesPage = () => {
                 handleOpenModal={handleOpenModal}
             />
 
-            <DateList />
+            <DateList 
+                handleOpenModal={handleOpenModal}
+            />
             {/* // TODO: Linea divisora en css y mapear turnos del día */}
         </>
     );
