@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { onResetDate } from '../store';
 import { startLogout } from '../store/auth/thunks';
 
 export const NavBar = () => {
@@ -8,8 +10,22 @@ export const NavBar = () => {
     const { displayName } = useSelector( state => state.auth );
 
     const onLogout = () => {
-        dispatch( startLogout() );
-        localStorage.removeItem('auth');
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: "Te desconectarás de tu cuenta",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Logout'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch( startLogout() );
+                localStorage.removeItem('auth');
+                dispatch( onResetDate() );
+            }
+          })
+        
     }
 
     return (

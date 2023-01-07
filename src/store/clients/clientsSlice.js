@@ -11,6 +11,11 @@ export const clientsSlice = createSlice({
         onAddNewClient: ( state, { payload } ) => {
             state.registeredClients.push(payload);
         },
+        onLogout: ( state ) => {
+            state.isLoadingClients = false;
+            state.registeredClients = [];
+            state.activeClient = [];
+        }
     }
 });
 

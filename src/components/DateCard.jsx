@@ -1,5 +1,9 @@
-export const DateCard = ({ startDate, price, description, client }) => {
+export const DateCard = ({ startDate, price, description, uid, client }) => {
+
     const hourFromDate = startDate.split(" ")[4].slice(0, 5);
+    const daysFromDate = new Date(startDate).toLocaleDateString();
+
+    const { name, reference, telephoneNumber} = client;
 
     return (
         <section className="container pt-2 pb-2 mw-100">
@@ -9,17 +13,17 @@ export const DateCard = ({ startDate, price, description, client }) => {
                     {/* FIRST TEXT ROW */}
                     <div className="row">
                         <div className="col-12">
-                            <h2>{hourFromDate}</h2>
+                            <h2>{ daysFromDate } - { hourFromDate }</h2>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <p>Cliente - referencia</p>
+                            <p>Cliente: { name } - { reference }</p>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <p>Telefono</p>
+                            <p>Teléfono: { telephoneNumber }</p>
                         </div>
                     </div>
                 </div>

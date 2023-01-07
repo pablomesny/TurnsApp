@@ -1,29 +1,22 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { onAddNewClient, onCloseClientsModal } from "../store";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+import { onAddNewClient } from "../store";
 
 const initialForm = {
     name: '',
     reference: '',
     telephoneNumber: '',
     email: '',
-    uid: ''
 }
 
-export const ModalClients = () => {
+export const ModalClients = ({ isOpenModal, handleOpenModal }) => {
 
     const dispatch = useDispatch();
 
-    const { isClientsModalOpen } = useSelector((state) => state.ui);
+    const [clientsFormValue, setClientsFormValue] = useState(initialForm);
 
-    const handleCloseModal = () => {
-        dispatch(onCloseClientsModal());
-    };
-
-    const [clientsFormValue, setClientsFormValue] = useState({initialForm});
-
-    const { name, reference, telephoneNumber, email, uid } = clientsFormValue;
 
     const onInputChange = ({ target:{ name, value } }) => {
         setClientsFormValue({
@@ -33,9 +26,17 @@ export const ModalClients = () => {
     }
 
     const onSubmit = () => {
+        const { name, reference, telephoneNumber } = clientsFormValue;
+        const formIncomplete = name === '' || reference === '' || telephoneNumber === '';
+
+        if( formIncomplete ){
+            Swal.fire( 'Error', 'Todos los campos son obligatorios', 'error' );
+            return;
+        }
+
         dispatch( onAddNewClient( onCreateNewClient() ) );
         setClientsFormValue(initialForm);
-        handleCloseModal();
+        handleOpenModal();
     }
 
     const onCreateNewClient = () => {
@@ -47,8 +48,8 @@ export const ModalClients = () => {
 
     return (
         <Modal 
-            show={isClientsModalOpen} 
-            onHide={handleCloseModal}
+            show={isOpenModal} 
+            onHide={handleOpenModal}
             size="md"
             centered
         >
@@ -65,7 +66,7 @@ export const ModalClients = () => {
                             className="form-control" 
                             type="text" 
                             name="name" 
-                            value={ name }
+                            value={ clientsFormValue.name }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -77,7 +78,7 @@ export const ModalClients = () => {
                             className="form-control" 
                             type="text" 
                             name="reference" 
-                            value={ reference }
+                            value={ clientsFormValue.reference }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -89,26 +90,26 @@ export const ModalClients = () => {
                             className="form-control" 
                             type="number" 
                             name="telephoneNumber" 
-                            value={ telephoneNumber }
+                            value={ clientsFormValue.telephoneNumber }
                             onChange={ onInputChange }
                         />
                     </div>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"
                     >
-                        <label className="w-100" htmlFor="email">Correo electrónico</label>
+                        <label className="w-100" htmlFor="email">Email (opcional)</label>
                         <input 
                             className="form-control" 
                             type="email" 
                             name="email" 
-                            value={ email }
+                            value={ clientsFormValue.email }
                             onChange={ onInputChange }
                         />
                     </div>
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
+                <Button variant="secondary" onClick={handleOpenModal}>
                     Cerrar
                 </Button>
                 <Button variant="primary" onClick={onSubmit}>

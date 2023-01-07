@@ -43,6 +43,10 @@ section {
     color: #fffffe;
 }
 
+input[placeholder="Filtrar clientes por nombre..."]{
+    height: 2.3rem;
+}
+
 .navbar {
     background-color: #fffffe;
 }

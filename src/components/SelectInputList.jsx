@@ -10,13 +10,13 @@ export const SelectInputList = ({ onInputChange }) => {
     <select 
         className="form-control" 
         name="client"
-        onChange={ (e) => onInputChange(e) }
+        onChange={ onInputChange }
     >
         <option value="">Seleccione un cliente</option>
         {
-            registeredClients && registeredClients.map( client => (
-                <option key={ client.uid } value={ client }>{ client.name } - { client.reference }</option>
-            ))
+            registeredClients && registeredClients.map( client => {
+                return <option key={ client.uid } value={ JSON.stringify(client) }>{ client.name } - { client.reference }</option>
+            })
         }
 
 

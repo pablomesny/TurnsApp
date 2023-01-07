@@ -4,12 +4,16 @@ import { DateCard } from "./DateCard";
 export const DateList = () => {
 
     const { dates } = useSelector( state => state.workDates );
-    dates.map(date => console.log(date))
+
+    const { actualDate } = useSelector( state => state.ui );
 
     return (
     <>
         { 
-          dates && dates.map( date => (
+          dates && 
+            dates
+            .filter( date => new Date(date.startDate).toLocaleDateString() === actualDate)
+            .map( date => (
 
             <DateCard 
                 key={ date.uid }

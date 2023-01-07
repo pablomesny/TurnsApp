@@ -1,7 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { onAddNewDate, onCloseDatesModal, setActiveDate } from "../store";
+import { useDispatch } from "react-redux";
+import { onAddNewDate } from "../store";
 import DatePicker, { registerLocale } from "react-datepicker";
+import Swal from 'sweetalert2';
 import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +12,7 @@ import { SelectInputList } from "./SelectInputList";
 registerLocale("es", es);
 
 const initialState = {
-    startDate: '',
+    startDate: new Date(),
     client: '',
     price: '',
     description: '',
@@ -19,15 +20,9 @@ const initialState = {
 
 // TODO: CAMBIAR INPUT DE CLIENTE A SELECT Y AGREGAR UID DE CLIENTE (MOSTRAR OPTION DE NOMBRE DEL CLIENTE) || ACTIVEDATE DE REDUX STATE -----------------------------------------
 
-export const ModalDates = () => {
+export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
 
     const dispatch = useDispatch();
-
-    const { isDatesModalOpen } = useSelector((state) => state.ui);
-
-    const handleCloseModal = () => {
-        dispatch(onCloseDatesModal());
-    };
 
     const [datesFormValue, setDatesFormValue] = useState(initialState);
 
@@ -39,7 +34,14 @@ export const ModalDates = () => {
     }
 
     const onInputChange = ({ target }) => {
-        console.log(target);
+        if( target.name === 'client' ){
+            setDatesFormValue({
+                ...datesFormValue,
+                [target.name]: JSON.parse(target.value)
+            })
+            return;
+        }
+        
         setDatesFormValue({
             ...datesFormValue,
             [target.name]: target.value
@@ -47,9 +49,16 @@ export const ModalDates = () => {
     }
 
     const onSubmit = () => {
+        const formIncomplete = datesFormValue.startDate === '' || datesFormValue.client === '' || datesFormValue.price === '' || datesFormValue.description === '';
+
+        if( formIncomplete ){
+            Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
+            return;
+        }
+
         dispatch( onAddNewDate( onCreateNewDate() ) );
         setDatesFormValue(initialState);
-        handleCloseModal();
+        handleOpenModal();
     }  
     
     const onCreateNewDate = () => {
@@ -61,8 +70,8 @@ export const ModalDates = () => {
 
     return (
         <Modal 
-            show={isDatesModalOpen} 
-            onHide={handleCloseModal}
+            show={isOpenModal} 
+            onHide={handleOpenModal}
             size="md"
             centered
         >
@@ -93,6 +102,7 @@ export const ModalDates = () => {
                             className="form-control"
                             onChange={ e => onDateInputChange(e, "startDate") }
                             selected={ Date.parse(datesFormValue.startDate) }
+                            minDate={ new Date() }
                         />
                     </div>
                     <div
@@ -104,14 +114,6 @@ export const ModalDates = () => {
                         >
                             Cliente
                         </label>
-
-                        {/* <input 
-                            className="form-control" 
-                            type="text" 
-                            name="client"
-                            value={ datesFormValue.client }
-                            onChange={ e => onInputChange(e) }
-                        /> */}
                         <SelectInputList onInputChange={ onInputChange } />
                     </div>
                     <div
@@ -146,7 +148,6 @@ export const ModalDates = () => {
                             className="form-control h-100" 
                             name="description" 
                             placeholder="Ingrese una descripción"
-                            maxLength={10}
                             value={ datesFormValue.description }
                             onChange={ onInputChange }
                         />
@@ -154,7 +155,7 @@ export const ModalDates = () => {
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
+                <Button variant="secondary" onClick={handleOpenModal}>
                     Cerrar
                 </Button>
                 <Button variant="primary" type="submit" onClick={ onSubmit }>
