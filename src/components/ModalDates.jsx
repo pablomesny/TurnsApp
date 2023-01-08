@@ -8,21 +8,51 @@ import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { SelectInputList } from "./SelectInputList";
+import { setHours, setMinutes } from "date-fns";
 
 registerLocale("es", es);
 
-// TODO: CAMBIAR INPUT DE CLIENTE A SELECT Y AGREGAR UID DE CLIENTE (MOSTRAR OPTION DE NOMBRE DEL CLIENTE) || ACTIVEDATE DE REDUX STATE -----------------------------------------
+const excludedTimes = () => {
+    let timesList = [];
+
+    for( let i = 0; i < 25; i++ ){
+        if(i < 7 || i > 16){
+
+            timesList.push(setHours(setMinutes(new Date(), 0), i));
+            timesList.push(setHours(setMinutes(new Date(), 30), i));
+
+        }
+    }
+
+    return timesList;
+}
+
+// TODO: LOOPEAR TIMESLIST - FILTRO DE HORARIOS DEL DATEPICKER
 
 export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
+
+    excludedTimes();
 
     const [datesFormValue, setDatesFormValue] = useState( initialState );
 
     const dispatch = useDispatch();
+
+    const isWeekday = (date) => {
+        const day = date.getDay();
+        return day !== 0 && day !== 6;
+    };
+
+    const filterPassedTime = (time) => {
+      const currentDate = new Date();
+      const selectedDate = new Date(time);
+    
+      return currentDate.getTime() < selectedDate.getTime();
+    };
     
     const onDateInputChange = (e, name) => {
         setDatesFormValue({
             ...datesFormValue,
-            [name]: e.toString()
+            [name]: e?.toString()
         });
     }
 
@@ -100,6 +130,10 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
                             onChange={ e => onDateInputChange(e, "startDate") }
                             selected={ Date.parse(datesFormValue.startDate) }
                             minDate={ new Date() }
+                            startDate={ new Date() }
+                            filterDate={ isWeekday }
+                            filterTime={ filterPassedTime }
+                            excludeTimes={ () => excludedTimes() }
                         />
                     </div>
                     <div
