@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 import { setHours, setMinutes } from "date-fns";
 
@@ -31,9 +31,18 @@ const excludedTimes = () => {
 
 export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
 
-    excludedTimes();
-
     const [datesFormValue, setDatesFormValue] = useState( initialState );
+
+    useEffect(() => {
+      if( datesFormValue === {} ){
+        setDatesFormValue({
+            startDate: new Date(),
+            client: {},
+            price: 0,
+            description: ''
+        })
+      }
+    }, [datesFormValue]);
 
     const dispatch = useDispatch();
 
@@ -85,6 +94,8 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
             dispatch( onAddNewDate( onCreateDateUid() ) );
         }
 
+        setDatesFormValue({});
+
         handleOpenModal();
     }  
     
@@ -133,7 +144,7 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
                             startDate={ new Date() }
                             filterDate={ isWeekday }
                             filterTime={ filterPassedTime }
-                            excludeTimes={ () => excludedTimes() }
+                            excludeTimes={ excludedTimes() }
                         />
                     </div>
                     <div

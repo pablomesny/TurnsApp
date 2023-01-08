@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
@@ -7,6 +7,18 @@ import { onAddNewClient, onUpdateClient, } from "../store";
 export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
 
     const [clientsFormValue, setClientsFormValue] = useState(initialState);
+
+    useEffect(() => {
+      if( clientsFormValue === {} ){
+        setClientsFormValue({
+            name: '',
+            reference: '',
+            telephoneNumber: '',
+            email: ''
+        })
+      }
+    }, [clientsFormValue]);
+    
 
     const dispatch = useDispatch();
   
@@ -33,6 +45,8 @@ export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }
         } else {
             dispatch( onAddNewClient( onCreateClientUid() ) );
         }
+
+        setClientsFormValue({});
 
         handleOpenModal();
     }
