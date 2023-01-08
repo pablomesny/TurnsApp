@@ -7,7 +7,6 @@ export const clientsSlice = createSlice({
     initialState: {
         isLoadingClients: false,
         registeredClients: [],
-        activeClient: {},
     },
     reducers: {
         onAddNewClient: ( state, { payload } ) => {
@@ -16,10 +15,7 @@ export const clientsSlice = createSlice({
         onLogout: ( state ) => {
             state.isLoadingClients = false;
             state.registeredClients = [];
-            state.activeClient = null;
-        },
-        setActiveClient: ( state, { payload } ) => {
-            state.activeClient = payload;
+            state.activeClient = {};
         },
         onUpdateClient: ( state, { payload } ) => {
             state.registeredClients = state.registeredClients.map( client => {
@@ -29,9 +25,6 @@ export const clientsSlice = createSlice({
                 return client;
             })
         },
-        onResetActiveClient: ( state ) => {
-            state.activeClient = null;
-        },
         onDeleteClient: ( state, { payload } ) => {
             state.registeredClients = state.registeredClients.filter( client => client.uid !== payload.uid );
         }
@@ -40,4 +33,4 @@ export const clientsSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onAddNewClient, onLogout, setActiveClient, onUpdateClient, onResetActiveClient, onDeleteClient } = clientsSlice.actions;
+export const { onAddNewClient, onLogout, onUpdateClient, onDeleteClient } = clientsSlice.actions;

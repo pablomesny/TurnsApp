@@ -1,43 +1,24 @@
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { onAddNewDate, onResetActiveWorkDate, onUpdateWorkDate, setActiveWorkDate } from "../store";
+import { useDispatch } from "react-redux";
+import { onAddNewDate, onUpdateWorkDate } from "../store";
 import DatePicker, { registerLocale } from "react-datepicker";
 import Swal from 'sweetalert2';
 import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 
 registerLocale("es", es);
 
-/* const initialState = {
-    startDate: new Date(),
-    client: '',
-    price: '',
-    description: '',
-} */
-
 // TODO: CAMBIAR INPUT DE CLIENTE A SELECT Y AGREGAR UID DE CLIENTE (MOSTRAR OPTION DE NOMBRE DEL CLIENTE) || ACTIVEDATE DE REDUX STATE -----------------------------------------
 
-export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
+export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
+
+    const [datesFormValue, setDatesFormValue] = useState( initialState );
 
     const dispatch = useDispatch();
-
-    const { activeWorkDate } = useSelector( state => state.workDates );
-
-    const [datesFormValue, setDatesFormValue] = useState(activeWorkDate);
-
-    useEffect(() => {
-      setDatesFormValue( activeWorkDate );
-    }, [activeWorkDate]);
     
-
-    useEffect(() => {
-      dispatch(setActiveWorkDate( datesFormValue ));
-    }, [datesFormValue]);
-    
-
     const onDateInputChange = (e, name) => {
         setDatesFormValue({
             ...datesFormValue,
@@ -61,8 +42,7 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
     }
 
     const onSubmit = () => {
-        const { startDate, client, price, description } = datesFormValue;
-        const formIncomplete = startDate === '' || client === '' || price === '' || description === '';
+        const formIncomplete = datesFormValue.startDate === '' || datesFormValue.client === null || datesFormValue.price === '' || datesFormValue.description === '';
 
         if( formIncomplete ){
             Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
@@ -75,7 +55,6 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
             dispatch( onAddNewDate( onCreateDateUid() ) );
         }
 
-        dispatch( onResetActiveWorkDate());
         handleOpenModal();
     }  
     

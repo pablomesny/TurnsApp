@@ -1,6 +1,6 @@
 import { ModalDates } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
-import { login, onResetActiveWorkDate, onSetActualDate } from "../../store";
+import { login, onSetActualDate } from "../../store";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 
@@ -43,8 +43,7 @@ export const DatesPage = () => {
     }, []);
 
     const handleOpenModal = () => {
-        setIsOpenModal( (prev) => !prev);
-        if( !activeWorkDate.uid ) dispatch( onResetActiveWorkDate() );
+        setIsOpenModal( prev => !prev );
     };
 
     return (
@@ -101,9 +100,7 @@ export const DatesPage = () => {
                 handleOpenModal={handleOpenModal}
             />
 
-            <DateList 
-                handleOpenModal={handleOpenModal}
-            />
+            <DateList />
             {/* // TODO: Linea divisora en css y mapear turnos del día */}
         </>
     );

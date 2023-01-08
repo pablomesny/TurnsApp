@@ -1,34 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { onAddNewClient, onUpdateClient, setActiveClient } from "../store";
+import { onAddNewClient, onUpdateClient, } from "../store";
 
-const initialForm = {
-    name: '',
-    reference: '',
-    telephoneNumber: '',
-    email: '',
-}
+export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
 
-export const ModalClients = ({ isOpenModal, handleOpenModal }) => {
+    const [clientsFormValue, setClientsFormValue] = useState(initialState);
 
     const dispatch = useDispatch();
-
-    const { activeClient } = useSelector( state => state.clients );
-
-    const [clientsFormValue, setClientsFormValue] = useState(activeClient);
-
-    useEffect(() => {
-      setClientsFormValue( activeClient );
-    }, [activeClient]);
-
-    useEffect(() => {
-      dispatch( setActiveClient( clientsFormValue ) );
-    }, [clientsFormValue]);
-    
-
-
+  
     const onInputChange = ({ target:{ name, value } }) => {
         setClientsFormValue({
             ...clientsFormValue,
@@ -39,6 +20,8 @@ export const ModalClients = ({ isOpenModal, handleOpenModal }) => {
     const onSubmit = () => {
         const { name, reference, telephoneNumber } = clientsFormValue;
         const formIncomplete = name === '' || reference === '' || telephoneNumber === '';
+
+        console.log(clientsFormValue)
 
         if( formIncomplete ){
             Swal.fire( 'Error', 'Todos los campos son obligatorios', 'error' );
@@ -51,7 +34,6 @@ export const ModalClients = ({ isOpenModal, handleOpenModal }) => {
             dispatch( onAddNewClient( onCreateClientUid() ) );
         }
 
-        setClientsFormValue(activeClient);
         handleOpenModal();
     }
 
