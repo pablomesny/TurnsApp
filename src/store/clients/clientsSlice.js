@@ -16,7 +16,7 @@ export const clientsSlice = createSlice({
         onLogout: ( state ) => {
             state.isLoadingClients = false;
             state.registeredClients = [];
-            state.activeClient = [];
+            state.activeClient = null;
         },
         setActiveClient: ( state, { payload } ) => {
             state.activeClient = payload;
@@ -30,7 +30,7 @@ export const clientsSlice = createSlice({
             })
         },
         onResetActiveClient: ( state ) => {
-            state.activeClient = {};
+            state.activeClient = null;
         },
         onDeleteClient: ( state, { payload } ) => {
             state.registeredClients = state.registeredClients.filter( client => client.uid !== payload.uid );

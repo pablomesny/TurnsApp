@@ -7,9 +7,7 @@ export const workDatesSlice = createSlice({
     initialState: {
         isLoadingDates: false,
         dates: [],
-        activeWorkDate: {
-            
-        },
+        activeWorkDate: null
     },
     reducers: {
         onAddNewDate: ( state, { payload } ) => {
@@ -27,7 +25,7 @@ export const workDatesSlice = createSlice({
             state.activeWorkDate = payload;
         },
         onResetActiveWorkDate: ( state ) => {
-            state.activeWorkDate = {};
+            state.activeWorkDate = null;
         },
         onDeleteWorkDate: ( state, { payload } ) => {
             state.dates = state.dates.filter( date => date.uid !== payload.uid );
