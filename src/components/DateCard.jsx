@@ -13,12 +13,12 @@ export const DateCard = ({ date, handleOpenModal }) => {
 
     const { name, reference, telephoneNumber} = client;
 
-    const onModifyDate = () => {
+    const onUpdate = () => {
         dispatch( setActiveWorkDate( date ));
         handleOpenModal();
     }
 
-    const onDeleteDate = () => {
+    const onDelete = () => {
         Swal.fire({
             title: 'Eliminar turno',
             icon: 'warning',
@@ -70,10 +70,10 @@ export const DateCard = ({ date, handleOpenModal }) => {
                     {/* BUTTONS ROW */}
                     <div className="row h-100 align-items-center">
                         <div className="col-12 d-flex justify-content-center">
-                            <button onClick={ onModifyDate }>Modificar</button>
+                            <button onClick={ onUpdate }>Modificar</button>
                         </div>
                         <div className="col-12 d-flex justify-content-center">
-                            <button onClick={ onDeleteDate } className="btn btn-danger">Borrar</button>
+                            <button onClick={ onDelete } className="btn btn-danger">Borrar</button>
                         </div>
                     </div>
                 </div>

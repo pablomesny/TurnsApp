@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { ClientCard } from "./ClientCard";
 
-export const ClientList = ({ clientsFilter }) => {
+export const ClientList = ({ clientsFilter, handleOpenModal }) => {
 
     const { registeredClients } = useSelector((state) => state.clients);
 
@@ -14,7 +14,8 @@ export const ClientList = ({ clientsFilter }) => {
                         .map( client => (
                     <ClientCard 
                         key={client.uid} 
-                        {...client} 
+                        client={ client }
+                        handleOpenModal={ handleOpenModal }
                     />
                 ))}
             </div>

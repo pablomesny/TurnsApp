@@ -61,7 +61,8 @@ export const ModalDates = ({ isOpenModal, handleOpenModal }) => {
     }
 
     const onSubmit = () => {
-        const formIncomplete = datesFormValue.startDate === '' || datesFormValue.client === '' || datesFormValue.price === '' || datesFormValue.description === '';
+        const { startDate, client, price, description } = datesFormValue;
+        const formIncomplete = startDate === '' || client === '' || price === '' || description === '';
 
         if( formIncomplete ){
             Swal.fire('Error', 'Todos los campos son obligatorios', 'error');

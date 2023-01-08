@@ -1,6 +1,34 @@
-export const ClientCard = ({ name, reference, telephoneNumber, email }) => {
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+import { onDeleteClient, setActiveClient } from "../store";
+
+export const ClientCard = ({ client, handleOpenModal }) => {
+
+    const dispatch = useDispatch();
+
+    const { name, reference, telephoneNumber, email } = client;
 
     // TODO: Modificar y eliminar
+
+    const onUpdate = () => {
+        dispatch( setActiveClient( client ) );
+        handleOpenModal();
+    }
+
+    const onDelete = () => {
+        Swal.fire({
+            title: 'Eliminar cliente',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch( onDeleteClient( client ) );
+            }
+          })
+    }
 
   return (
     <article className="col-3 mt-3 mb-3">
@@ -17,10 +45,10 @@ export const ClientCard = ({ name, reference, telephoneNumber, email }) => {
             Email: { email }
         </h4>
         <div className="d-flex mt-5 justify-content-around">
-            <button>
+            <button onClick={ onUpdate }>
                 Modificar
             </button>
-            <button className="btn btn-danger">
+            <button onClick={ onDelete } className="btn btn-danger">
                 Eliminar
             </button>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClientList, ModalClients } from "../../components";
-import { login } from "../../store";
+import { login, onResetActiveClient } from "../../store";
 
 // TODO: Resolver doble login desde thunk de auth y useEffect de este componente
 
@@ -10,6 +10,7 @@ export const ClientsPage = () => {
     const dispatch = useDispatch();
 
     const { status } = useSelector( state => state.auth );
+    const { activeClient } = useSelector( state => state.clients );
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -24,6 +25,7 @@ export const ClientsPage = () => {
 
     const handleOpenModal = () => {
         setIsOpenModal((prev) => !prev);
+        if( !!activeClient.uid ) dispatch( onResetActiveClient() );
     };
 
     const onInputChange = ({ target }) => {
@@ -64,7 +66,7 @@ export const ClientsPage = () => {
                 handleOpenModal={handleOpenModal}
             />
 
-            <ClientList clientsFilter={ clientsFilter } />
+            <ClientList clientsFilter={ clientsFilter } handleOpenModal={ handleOpenModal } />
         </>
     );
 };

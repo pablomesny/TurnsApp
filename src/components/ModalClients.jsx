@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { onAddNewClient } from "../store";
+import { onAddNewClient, onUpdateClient, setActiveClient } from "../store";
 
 const initialForm = {
     name: '',
@@ -15,7 +15,18 @@ export const ModalClients = ({ isOpenModal, handleOpenModal }) => {
 
     const dispatch = useDispatch();
 
-    const [clientsFormValue, setClientsFormValue] = useState(initialForm);
+    const { activeClient } = useSelector( state => state.clients );
+
+    const [clientsFormValue, setClientsFormValue] = useState(activeClient);
+
+    useEffect(() => {
+      setClientsFormValue( activeClient );
+    }, [activeClient]);
+
+    useEffect(() => {
+      dispatch( setActiveClient( clientsFormValue ) );
+    }, [clientsFormValue]);
+    
 
 
     const onInputChange = ({ target:{ name, value } }) => {
@@ -34,12 +45,17 @@ export const ModalClients = ({ isOpenModal, handleOpenModal }) => {
             return;
         }
 
-        dispatch( onAddNewClient( onCreateNewClient() ) );
-        setClientsFormValue(initialForm);
+        if(!!clientsFormValue.uid) {
+            dispatch( onUpdateClient( clientsFormValue ) );
+        } else {
+            dispatch( onAddNewClient( onCreateClientUid() ) );
+        }
+
+        setClientsFormValue(activeClient);
         handleOpenModal();
     }
 
-    const onCreateNewClient = () => {
+    const onCreateClientUid = () => {
         return {
             ...clientsFormValue,
             uid: new Date().getTime()

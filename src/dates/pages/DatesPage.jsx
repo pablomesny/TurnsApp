@@ -44,7 +44,7 @@ export const DatesPage = () => {
 
     const handleOpenModal = () => {
         setIsOpenModal( (prev) => !prev);
-        if( !!activeWorkDate.uid ) dispatch( onResetActiveWorkDate() );
+        if( !activeWorkDate.uid ) dispatch( onResetActiveWorkDate() );
     };
 
     return (

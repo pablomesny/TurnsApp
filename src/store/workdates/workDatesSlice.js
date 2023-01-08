@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// TODO: Payload de initialForm en reset
+
 export const workDatesSlice = createSlice({
     name: 'workDates',
     initialState: {
@@ -14,8 +16,12 @@ export const workDatesSlice = createSlice({
             state.dates.push( payload );
         },
         onUpdateWorkDate: ( state, { payload } ) => {
-            state.dates = state.dates.filter( date => date.uid !== payload.uid );
-            state.dates.push( payload );
+            state.dates = state.dates.map( date => {
+                if( date.uid === payload.uid ){
+                    return payload;
+                }
+                return date;
+            })
         },
         setActiveWorkDate: (state, { payload } ) => {
             state.activeWorkDate = payload;
@@ -25,7 +31,7 @@ export const workDatesSlice = createSlice({
         },
         onDeleteWorkDate: ( state, { payload } ) => {
             state.dates = state.dates.filter( date => date.uid !== payload.uid );
-        }
+        },
     },
 });
 
