@@ -16,7 +16,7 @@ export const DateList = () => {
             .map( date => (
 
             <DateCard 
-                key={ date.uid }
+                key={ date.id }
                 date={ date }
             />
         ))}

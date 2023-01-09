@@ -7,20 +7,25 @@ import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { DateList } from "../../components/DateList";
+import { startLoadingTurns } from "../../store/workdates";
 
 registerLocale("es", es);
 
 export const DatesPage = () => {
 
-    const [isOpenModal, setIsOpenModal] = useState(false);
-
     const dispatch = useDispatch();
+
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
     const { actualDate } = useSelector((state) => state.ui);
     const { status } = useSelector( state => state.auth );
-    const { activeWorkDate } = useSelector( state => state.workDates );
 
     const [formValue, setFormValue] = useState({});
+
+    useEffect(() => {
+      dispatch(startLoadingTurns())
+    }, []);
+    
 
     const onInputChange = (e, name) => {
         setFormValue({

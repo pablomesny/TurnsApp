@@ -6,8 +6,6 @@ import { ModalClients } from "./ModalClients";
 
 export const ClientCard = ({ client }) => {
 
-    console.log(client)
-
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const handleOpenModal = () => {

@@ -21,8 +21,6 @@ export const NavBar = () => {
           }).then((result) => {
             if (result.isConfirmed) {
                 dispatch( startLogout() );
-                localStorage.removeItem('auth');
-                dispatch( onResetDate() );
             }
           })
         

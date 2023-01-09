@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 import { setHours, setMinutes } from "date-fns";
+import { startNewWorkDate } from "../store/workdates";
 
 registerLocale("es", es);
 
@@ -34,10 +35,10 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
     const [datesFormValue, setDatesFormValue] = useState( initialState );
 
     useEffect(() => {
-      if( datesFormValue === {} ){
+      if( Object.entries(datesFormValue).length === 0 ){
         setDatesFormValue({
             startDate: new Date(),
-            client: {},
+            client: null,
             price: 0,
             description: ''
         })
@@ -81,7 +82,8 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
     }
 
     const onSubmit = () => {
-        const formIncomplete = datesFormValue.startDate === '' || datesFormValue.client === null || datesFormValue.price === '' || datesFormValue.description === '';
+        const { startDate, client, description } = datesFormValue;
+        const formIncomplete = !startDate || client === null || description === '';
 
         if( formIncomplete ){
             Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
@@ -91,20 +93,13 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
         if(!!datesFormValue.uid) {
             dispatch( onUpdateWorkDate( datesFormValue ) );
         } else {
-            dispatch( onAddNewDate( onCreateDateUid() ) );
+            dispatch( startNewWorkDate( datesFormValue ) );
         }
 
         setDatesFormValue({});
 
         handleOpenModal();
     }  
-    
-    const onCreateDateUid = () => {
-        return {
-            ...datesFormValue,
-            uid: new Date().getTime()
-        }
-    }
 
     return (
         <Modal 

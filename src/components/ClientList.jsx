@@ -5,8 +5,6 @@ export const ClientList = ({ clientsFilter }) => {
 
     const { registeredClients } = useSelector((state) => state.clients);
 
-    console.log(registeredClients)
-
     return (
         <section className="container mw-100">
             <div className="row">

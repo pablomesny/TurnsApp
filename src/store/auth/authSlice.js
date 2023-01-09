@@ -25,7 +25,7 @@ export const authSlice = createSlice({
             state.status = 'not-authenticated';
             state.uid = null;
             state.displayName = null;
-            state.errorMessage = payload;
+            state.errorMessage = payload?.errorMessage;
         }
     }
 });

@@ -9,7 +9,7 @@ export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }
     const [clientsFormValue, setClientsFormValue] = useState(initialState);
 
     useEffect(() => {
-      if( clientsFormValue === {} ){
+      if( Object.entries(clientsFormValue).length === 0 ){
         setClientsFormValue({
             name: '',
             reference: '',
@@ -17,8 +17,7 @@ export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }
             email: ''
         })
       }
-    }, [clientsFormValue]);
-    
+    }, [clientsFormValue]);        
 
     const dispatch = useDispatch();
   
@@ -32,8 +31,6 @@ export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }
     const onSubmit = () => {
         const { name, reference, telephoneNumber } = clientsFormValue;
         const formIncomplete = name === '' || reference === '' || telephoneNumber === '';
-
-        console.log(clientsFormValue)
 
         if( formIncomplete ){
             Swal.fire( 'Error', 'Todos los campos son obligatorios', 'error' );

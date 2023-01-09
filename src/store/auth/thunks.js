@@ -22,6 +22,8 @@ export const startLogout = () => {
 
         await logoutFirebase();
         dispatch( logout() );
+        localStorage.removeItem('auth');
+        dispatch( onResetDate() );
 
     }
 }

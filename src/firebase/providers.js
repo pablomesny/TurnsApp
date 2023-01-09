@@ -1,5 +1,4 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseAuth } from './config';
 
 
@@ -31,5 +30,5 @@ export const signInWithGoogle = async() => {
 }
 
 export const logoutFirebase = async () => {
-    await FirebaseAuth.signOut();
+    return await FirebaseAuth.signOut();
 }
