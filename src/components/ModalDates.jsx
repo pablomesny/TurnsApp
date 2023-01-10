@@ -90,7 +90,7 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
             return;
         }
 
-        if(!!datesFormValue.uid) {
+        if(!!datesFormValue.id) {
             dispatch( startUpdateTurn( datesFormValue ) );
         } else {
             dispatch( startNewWorkDate( datesFormValue ) );
