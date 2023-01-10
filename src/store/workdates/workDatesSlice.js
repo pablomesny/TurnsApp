@@ -18,14 +18,14 @@ export const workDatesSlice = createSlice({
         },
         onUpdateWorkDate: ( state, { payload } ) => {
             state.dates = state.dates.map( date => {
-                if( date.uid === payload.uid ){
+                if( date.id === payload.id ){
                     return payload;
                 }
                 return date;
             })
         },
         onDeleteWorkDate: ( state, { payload } ) => {
-            state.dates = state.dates.filter( date => date.uid !== payload.uid );
+            state.dates = state.dates.filter( date => date.id !== payload.id );
         }
     },
 });

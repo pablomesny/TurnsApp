@@ -1,7 +1,8 @@
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { async } from "@firebase/util";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { loadTurns } from "../../helpers";
-import { onAddNewDate, setTurns } from "./workDatesSlice";
+import { onAddNewDate, onDeleteWorkDate, onUpdateWorkDate, setTurns } from "./workDatesSlice";
 
 export const startNewWorkDate = ( turn ) => {
     return async( dispatch, getState ) => {
@@ -30,3 +31,34 @@ export const startLoadingTurns = () => {
         dispatch(setTurns(turns));
     }
 }
+
+export const startUpdateTurn = ( turn ) => {
+    return async( dispatch, getState ) => {
+
+        const { uid } = getState().auth;
+
+        const turnToFirestore = { ...turn };
+        delete turnToFirestore.id;
+
+        const docRef = doc( FirebaseDB, `${ uid }/turnsapp/turns/${ turn.id }`);
+        await setDoc( docRef, turnToFirestore, { merge: true });
+
+        dispatch( onUpdateWorkDate(turn) );
+
+    }
+}
+
+export const startDeleteTurn = ( turn ) => {
+    return async( dispatch, getState ) => {
+
+        const { uid } = getState().auth;
+
+        const docRef = doc( FirebaseDB, `${ uid }/turnsapp/turns/${ turn.id }`);
+        await deleteDoc(docRef);
+
+        dispatch( onDeleteWorkDate( turn ) );
+
+    }
+}
+
+// TODO: Implementar startDeleteTurn en DateCard

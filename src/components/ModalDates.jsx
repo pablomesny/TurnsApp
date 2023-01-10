@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 import { setHours, setMinutes } from "date-fns";
-import { startNewWorkDate } from "../store/workdates";
+import { startNewWorkDate, startUpdateTurn } from "../store/workdates";
 
 registerLocale("es", es);
 
@@ -91,7 +91,7 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
         }
 
         if(!!datesFormValue.uid) {
-            dispatch( onUpdateWorkDate( datesFormValue ) );
+            dispatch( startUpdateTurn( datesFormValue ) );
         } else {
             dispatch( startNewWorkDate( datesFormValue ) );
         }
