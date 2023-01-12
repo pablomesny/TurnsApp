@@ -28,8 +28,6 @@ const excludedTimes = () => {
     return timesList;
 }
 
-// TODO: LOOPEAR TIMESLIST - FILTRO DE HORARIOS DEL DATEPICKER
-
 export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
 
     const [datesFormValue, setDatesFormValue] = useState( initialState );

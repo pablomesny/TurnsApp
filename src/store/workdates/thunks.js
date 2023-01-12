@@ -13,8 +13,6 @@ export const startNewWorkDate = ( turn ) => {
 
         turn.id = newDoc.id;
 
-        console.log(turn);
-
         dispatch(onAddNewDate(turn));
     }
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { onDeleteClient } from "../store";
+import { startDeleteClient } from "../store/clients/thunks";
 import { ModalClients } from "./ModalClients";
 
 export const ClientCard = ({ client }) => {
@@ -26,7 +26,7 @@ export const ClientCard = ({ client }) => {
             confirmButtonText: "Eliminar",
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(onDeleteClient(client));
+                dispatch(startDeleteClient(client));
             }
         });
     };

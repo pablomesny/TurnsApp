@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClientList, ModalClients } from "../../components";
 import { login } from "../../store";
+import { startLoadingClients } from "../../store/clients/thunks";
+import { startLoadingTurns } from "../../store/workdates";
 
 // TODO: Resolver doble login desde thunk de auth y useEffect de este componente
 
@@ -9,11 +11,21 @@ export const ClientsPage = () => {
 
     const dispatch = useDispatch();
 
-    const { status } = useSelector( state => state.auth );
-
     const [isOpenModal, setIsOpenModal] = useState(false);
-
     const [clientsFilter, setClientsFilter] = useState('');
+
+    const { status } = useSelector( state => state.auth );
+    const { dates } = useSelector ( state => state.workDates );
+    const { registeredClients } = useSelector( state => state.clients)
+
+    useEffect(() => {
+        if( dates.length === 0 ){
+            dispatch(startLoadingTurns());
+        }
+        if( registeredClients.length === 0 ){
+            dispatch(startLoadingClients());
+        }
+    }, []);
 
     useEffect(() => {
         const authData = JSON.parse(localStorage.getItem("auth"));

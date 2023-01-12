@@ -27,10 +27,13 @@ export const clientsSlice = createSlice({
         },
         onDeleteClient: ( state, { payload } ) => {
             state.registeredClients = state.registeredClients.filter( client => client.uid !== payload.uid );
+        },
+        setClients: ( state, { payload } ) => {
+            state.registeredClients = payload;
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onAddNewClient, onLogout, onUpdateClient, onDeleteClient } = clientsSlice.actions;
+export const { onAddNewClient, onLogout, onUpdateClient, onDeleteClient, setClients } = clientsSlice.actions;

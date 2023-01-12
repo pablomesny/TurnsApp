@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { onAddNewClient, onUpdateClient, } from "../store";
+import { startNewClient, startUpdateClients } from "../store/clients/thunks";
 
 export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
 
@@ -37,22 +37,15 @@ export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }
             return;
         }
 
-        if(!!clientsFormValue.uid) {
-            dispatch( onUpdateClient( clientsFormValue ) );
+        if(!!clientsFormValue.id) {
+            dispatch( startUpdateClients( clientsFormValue ) );
         } else {
-            dispatch( onAddNewClient( onCreateClientUid() ) );
+            dispatch( startNewClient( clientsFormValue ) );
         }
 
         setClientsFormValue({});
 
         handleOpenModal();
-    }
-
-    const onCreateClientUid = () => {
-        return {
-            ...clientsFormValue,
-            uid: new Date().getTime()
-        }
     }
 
     return (

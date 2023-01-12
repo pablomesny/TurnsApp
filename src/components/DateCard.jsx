@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { onDeleteWorkDate } from "../store";
+import { startDeleteTurn } from "../store/workdates";
 import { ModalDates } from "./ModalDates";
 
 export const DateCard = ({ date }) => {
@@ -31,7 +31,7 @@ export const DateCard = ({ date }) => {
             confirmButtonText: "Eliminar",
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(onDeleteWorkDate(date));
+                dispatch(startDeleteTurn(date));
             }
         });
     };

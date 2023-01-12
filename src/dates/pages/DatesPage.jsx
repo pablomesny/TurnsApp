@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { DateList } from "../../components/DateList";
 import { startLoadingTurns } from "../../store/workdates";
+import { startLoadingClients } from "../../store/clients/thunks";
 
 registerLocale("es", es);
 
@@ -19,14 +20,27 @@ export const DatesPage = () => {
 
     const { actualDate } = useSelector((state) => state.ui);
     const { status } = useSelector( state => state.auth );
+    const { dates } = useSelector( state => state.workDates);
+    const { registeredClients } = useSelector( state => state.clients );
 
     const [formValue, setFormValue] = useState({});
 
     useEffect(() => {
-      dispatch(startLoadingTurns())
+        if( dates.length === 0 ){
+            dispatch(startLoadingTurns());
+        }
+        if( registeredClients.length === 0 ){
+            dispatch(startLoadingClients());
+        }
     }, []);
     
-
+    useEffect(() => {
+        const authData = JSON.parse(localStorage.getItem("auth"));
+        if (authData && status !== 'authenticated') {
+            dispatch(login(authData));
+        }
+    }, []);
+    
     const onInputChange = (e, name) => {
         setFormValue({
             ...formValue,
@@ -40,12 +54,6 @@ export const DatesPage = () => {
         dispatch(onSetActualDate(formValue.date.toLocaleDateString()));
     };
 
-    useEffect(() => {
-        const authData = JSON.parse(localStorage.getItem("auth"));
-        if (authData && status !== 'authenticated') {
-            dispatch(login(authData));
-        }
-    }, []);
 
     const handleOpenModal = () => {
         setIsOpenModal( prev => !prev );

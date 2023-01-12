@@ -10,10 +10,10 @@ export const ClientList = ({ clientsFilter }) => {
             <div className="row">
                 {
                     registeredClients
-                        .filter( client => client.name.toLowerCase().startsWith(clientsFilter.toLowerCase()))
+                        .filter( client => client.name?.toLowerCase().startsWith(clientsFilter.toLowerCase()))
                         .map( client => (
                     <ClientCard 
-                        key={client.uid} 
+                        key={client.id} 
                         client={ client }
                     />
                 ))}
