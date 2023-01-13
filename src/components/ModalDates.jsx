@@ -1,5 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { onAddNewDate, onUpdateWorkDate } from "../store";
 import DatePicker, { registerLocale } from "react-datepicker";
 import Swal from 'sweetalert2';
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 import { setHours, setMinutes } from "date-fns";
 import { startNewWorkDate, startUpdateTurn } from "../store/workdates";
+import { startLoadingClients } from "../store/clients/thunks";
 
 registerLocale("es", es);
 
@@ -30,21 +31,29 @@ const excludedTimes = () => {
 
 export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
 
+    const dispatch = useDispatch();
+
+    const { registeredClients } = useSelector( state => state.clients );
+
     const [datesFormValue, setDatesFormValue] = useState( initialState );
 
     useEffect(() => {
       if( Object.entries(datesFormValue).length === 0 ){
         setDatesFormValue({
             startDate: new Date(),
-            client: null,
-            price: 0,
+            client: '',
+            price: '',
             description: ''
         })
       }
     }, [datesFormValue]);
 
-    const dispatch = useDispatch();
-
+    useEffect(() => {
+      if( registeredClients.length === 0 ) {
+        dispatch(startLoadingClients())
+      }
+    }, []);
+    
     const isWeekday = (date) => {
         const day = date.getDay();
         return day !== 0 && day !== 6;
@@ -81,7 +90,8 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
 
     const onSubmit = () => {
         const { startDate, client, description } = datesFormValue;
-        const formIncomplete = !startDate || client === null || description === '';
+        console.log(client);
+        const formIncomplete = !startDate || client === '' || description === '';
 
         if( formIncomplete ){
             Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
@@ -158,7 +168,7 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
                             htmlFor="price"
                             className="w-100"
                         >
-                            Presupuesto
+                            Presupuesto (opcional)
                         </label>
                         <input 
                             className="form-control" 

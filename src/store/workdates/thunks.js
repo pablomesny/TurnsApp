@@ -57,5 +57,3 @@ export const startDeleteTurn = ( turn ) => {
 
     }
 }
-
-// TODO: Implementar startDeleteTurn en DateCard

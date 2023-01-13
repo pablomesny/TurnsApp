@@ -11,7 +11,7 @@ export const SelectInputList = ({ selectedClient = {}, onInputChange }) => {
         onChange={ onInputChange }
         value={ selectedClient?.id ? JSON.stringify(selectedClient) : '' }
     >
-        <option value="">Seleccione un cliente</option>
+        <option disabled value="">Seleccione un cliente</option>
         {
             registeredClients && registeredClients.map( client => {
                 return <option key={ client.id } value={ JSON.stringify(client) }>{ client.name } - { client.reference }</option>
