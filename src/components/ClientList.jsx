@@ -7,7 +7,6 @@ export const ClientList = ({ clientsFilter }) => {
 
     const filteredClients = registeredClients.filter( client => client.name.toLowerCase().startsWith(clientsFilter.toLowerCase()))
 
-
     return (
         <section className="container mw-100">
             <div className="row">

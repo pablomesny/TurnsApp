@@ -26,7 +26,7 @@ export const clientsSlice = createSlice({
             })
         },
         onDeleteClient: ( state, { payload } ) => {
-            state.registeredClients = state.registeredClients.filter( client => client.uid !== payload.uid );
+            state.registeredClients = state.registeredClients.filter( client => client.id !== payload.id );
         },
         setClients: ( state, { payload } ) => {
             state.registeredClients = payload;
