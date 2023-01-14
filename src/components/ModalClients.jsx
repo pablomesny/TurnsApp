@@ -4,29 +4,27 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { startNewClient, startUpdateClients } from "../store/clients/thunks";
 
-export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal, type }) => {
+const emptyValues = {
+    name: '',
+    reference: '',
+    telephoneNumber: '',
+    email: ''
+}
 
-    const [clientsFormValue, setClientsFormValue] = useState( 
-        type === 'new' ? {} : initialState
-     );
-
-    useEffect(() => {
-      if( Object.entries(clientsFormValue).length === 0 ){
-        setClientsFormValue({
-            name: '',
-            reference: '',
-            telephoneNumber: '',
-            email: ''
-        })
-      }
-    }, [clientsFormValue]);        
+export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type }) => {
 
     const dispatch = useDispatch();
+
+    const [clientsFormValue, setClientsFormValue] = useState( 
+        type === 'new' 
+            ? emptyValues 
+            : initialState
+    );
   
-    const onInputChange = ({ target:{ name, value } }) => {
+    const onInputChange = ({ target }) => {
         setClientsFormValue({
             ...clientsFormValue,
-            [name]: value
+            [target.name]: target.value
         });
     }
 
@@ -45,7 +43,7 @@ export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal, 
             dispatch( startNewClient( clientsFormValue ) );
         }
 
-        setClientsFormValue({});
+        setClientsFormValue(emptyValues);
 
         handleOpenModal();
     }
