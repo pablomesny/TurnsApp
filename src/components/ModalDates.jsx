@@ -1,6 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { onAddNewDate, onUpdateWorkDate } from "../store";
 import DatePicker, { registerLocale } from "react-datepicker";
 import Swal from 'sweetalert2';
 import es from "date-fns/locale/es";
@@ -13,6 +12,8 @@ import { startNewWorkDate, startUpdateTurn } from "../store/workdates";
 import { startLoadingClients } from "../store/clients/thunks";
 
 registerLocale("es", es);
+
+// TODO: limpiar formulario, uncontrolled component y consolelogs del datesFormValue cambiando al cargar los turnos de firestore
 
 const excludedTimes = () => {
     let timesList = [];
@@ -29,24 +30,24 @@ const excludedTimes = () => {
     return timesList;
 }
 
-export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
+const emptyValues = {
+    startDate: new Date(),
+    client: '',
+    price: '',
+    description: ''
+};
+
+export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type }) => {
 
     const dispatch = useDispatch();
 
     const { registeredClients } = useSelector( state => state.clients );
 
-    const [datesFormValue, setDatesFormValue] = useState( initialState );
-
-    useEffect(() => {
-      if( Object.entries(datesFormValue).length === 0 ){
-        setDatesFormValue({
-            startDate: new Date(),
-            client: '',
-            price: '',
-            description: ''
-        })
-      }
-    }, [datesFormValue]);
+    const [datesFormValue, setDatesFormValue] = useState( 
+        type === 'new' 
+            ? emptyValues
+            : initialState
+     );
 
     useEffect(() => {
       if( registeredClients.length === 0 ) {
@@ -69,7 +70,7 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
     const onDateInputChange = (e, name) => {
         setDatesFormValue({
             ...datesFormValue,
-            [name]: e?.toString()
+            [name]: e.toString()
         });
     }
 
@@ -90,7 +91,6 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
 
     const onSubmit = () => {
         const { startDate, client, description } = datesFormValue;
-        console.log(client);
         const formIncomplete = !startDate || client === '' || description === '';
 
         if( formIncomplete ){
@@ -104,7 +104,7 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
             dispatch( startNewWorkDate( datesFormValue ) );
         }
 
-        setDatesFormValue({});
+        setDatesFormValue(emptyValues);
 
         handleOpenModal();
     }  
@@ -159,7 +159,9 @@ export const ModalDates = ({ initialState = {}, isOpenModal, handleOpenModal }) 
                         >
                             Cliente
                         </label>
+
                         <SelectInputList selectedClient={datesFormValue.client} onInputChange={ onInputChange } />
+
                     </div>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"

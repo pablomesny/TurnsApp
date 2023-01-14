@@ -6,7 +6,6 @@ export const workDatesSlice = createSlice({
     name: 'workDates',
     initialState: {
         isSaving: false,
-        messageSaved: '',
         dates: [],
     },
     reducers: {

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { DateCard } from "./DateCard";
 
 export const DateList = () => {
+
     const { dates } = useSelector((state) => state.workDates);
 
     const { actualDate } = useSelector((state) => state.ui);

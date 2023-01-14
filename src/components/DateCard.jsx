@@ -19,8 +19,6 @@ export const DateCard = ({ date }) => {
     const hourFromDate = startDate.split(" ")[4].slice(0, 5);
     const daysFromDate = new Date(startDate).toLocaleDateString();
 
-    /* const { name, reference, telephoneNumber } = client; */
-
     const onDelete = () => {
         Swal.fire({
             title: "Eliminar turno",
@@ -94,6 +92,7 @@ export const DateCard = ({ date }) => {
                     </div>
                 </article>
             </section>
+            
 
             <ModalDates
                 initialState={date}

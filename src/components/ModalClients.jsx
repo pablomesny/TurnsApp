@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { startNewClient, startUpdateClients } from "../store/clients/thunks";
 
-export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal }) => {
+export const ModalClients = ({ initialState = {}, isOpenModal, handleOpenModal, type }) => {
 
-    const [clientsFormValue, setClientsFormValue] = useState(initialState);
+    const [clientsFormValue, setClientsFormValue] = useState( 
+        type === 'new' ? {} : initialState
+     );
 
     useEffect(() => {
       if( Object.entries(clientsFormValue).length === 0 ){

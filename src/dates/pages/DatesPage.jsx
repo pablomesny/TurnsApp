@@ -106,6 +106,7 @@ export const DatesPage = () => {
             <ModalDates
                 isOpenModal={isOpenModal}
                 handleOpenModal={handleOpenModal}
+                type={'new'}
             />
 
             <DateList />

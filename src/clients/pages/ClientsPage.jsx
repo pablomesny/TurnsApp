@@ -69,6 +69,7 @@ export const ClientsPage = () => {
             <ModalClients
                 isOpenModal={isOpenModal}
                 handleOpenModal={handleOpenModal}
+                type={'new'}
             />
 
             <ClientList clientsFilter={ clientsFilter } />
