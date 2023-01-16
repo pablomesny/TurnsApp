@@ -1,7 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker, { registerLocale } from "react-datepicker";
-import Swal from 'sweetalert2';
 import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,11 +8,10 @@ import { useEffect, useState } from "react";
 import { SelectInputList } from "./SelectInputList";
 import { setHours, setMinutes } from "date-fns";
 import { startNewWorkDate, startUpdateTurn } from "../store/workdates";
-import { startLoadingClients } from "../store/clients/thunks";
+import { turnsFormValidation } from "../helpers";
+import { startLoadingClients } from "../store/clients";
 
 registerLocale("es", es);
-
-// TODO: limpiar formulario, uncontrolled component y consolelogs del datesFormValue cambiando al cargar los turnos de firestore
 
 const excludedTimes = () => {
     let timesList = [];
@@ -90,13 +88,7 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
     }
 
     const onSubmit = () => {
-        const { startDate, client, description } = datesFormValue;
-        const formIncomplete = !startDate || client === '' || description === '';
-
-        if( formIncomplete ){
-            Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
-            return;
-        }
+        if( turnsFormValidation(datesFormValue) ) return;
 
         if(!!datesFormValue.id) {
             dispatch( startUpdateTurn( datesFormValue ) );
@@ -108,6 +100,10 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
 
         handleOpenModal();
     }  
+
+    const onPressEnter = (e) => {
+        if( e.key === 'Enter' ) onSubmit();
+    }
 
     return (
         <Modal 
@@ -122,7 +118,7 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form>
+                <form onSubmit={onSubmit} onKeyDown={onPressEnter}>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"
                     >
@@ -205,7 +201,7 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
                 <Button variant="secondary" onClick={handleOpenModal}>
                     Cerrar
                 </Button>
-                <Button variant="primary" type="submit" onClick={ onSubmit }>
+                <Button variant="primary" type="submit">
                     Guardar
                 </Button>
             </Modal.Footer>

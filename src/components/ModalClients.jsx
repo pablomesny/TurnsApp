@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
+import { clientsFormValidation } from "../helpers";
 import { startNewClient, startUpdateClients } from "../store/clients/thunks";
 
 const emptyValues = {
@@ -29,13 +29,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
     }
 
     const onSubmit = () => {
-        const { name, reference, telephoneNumber } = clientsFormValue;
-        const formIncomplete = name === '' || reference === '' || telephoneNumber === '';
-
-        if( formIncomplete ){
-            Swal.fire( 'Error', 'Todos los campos son obligatorios', 'error' );
-            return;
-        }
+        if( clientsFormValidation(clientsFormValue) ) return;
 
         if(!!clientsFormValue.id) {
             dispatch( startUpdateClients( clientsFormValue ) );
@@ -46,6 +40,10 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
         setClientsFormValue(emptyValues);
 
         handleOpenModal();
+    }
+
+    const onPressEnter = (e) => {
+        if( e.key === 'Enter' ) onSubmit();
     }
 
     return (
@@ -59,7 +57,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                 <Modal.Title>CLIENTE</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form>
+                <form onSubmit={onSubmit} onKeyDown={onPressEnter}>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"
                     >
@@ -114,7 +112,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                 <Button variant="secondary" onClick={handleOpenModal}>
                     Cerrar
                 </Button>
-                <Button variant="primary" onClick={onSubmit}>
+                <Button variant="primary" type="submit">
                     Guardar
                 </Button>
             </Modal.Footer>
