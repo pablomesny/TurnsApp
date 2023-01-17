@@ -1,4 +1,3 @@
-import { ModalDates } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { login, onSetActualDate } from "../../store";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -6,12 +5,12 @@ import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
-import { DateList } from "../../components/DateList";
-import { startLoadingTurns } from "../../store/workdates";
+import { startLoadingTurns } from "../../store/turns";
+import { ModalTurns, TurnList } from "../components";
 
 registerLocale("es", es);
 
-export const DatesPage = () => {
+export const TurnsPage = () => {
 
     const dispatch = useDispatch();
 
@@ -19,12 +18,12 @@ export const DatesPage = () => {
 
     const { actualDate } = useSelector((state) => state.ui);
     const { status } = useSelector( state => state.auth );
-    const { dates } = useSelector( state => state.workDates);
+    const { registeredTurns } = useSelector( state => state.turns);
 
     const [formValue, setFormValue] = useState({});
 
     useEffect(() => {
-        if( dates.length === 0 ){
+        if( registeredTurns.length === 0 ){
             dispatch(startLoadingTurns());
         }
     }, []);
@@ -103,14 +102,13 @@ export const DatesPage = () => {
                 </div>
             </main>
 
-            <ModalDates
+            <ModalTurns
                 isOpenModal={isOpenModal}
                 handleOpenModal={handleOpenModal}
                 type={'new'}
             />
 
-            <DateList />
-            {/* // TODO: Linea divisora en css y mapear turnos del día */}
+            <TurnList />
         </>
     );
 };

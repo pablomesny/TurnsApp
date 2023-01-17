@@ -19,7 +19,7 @@ export const clientsSlice = createSlice({
         },
         onUpdateClient: ( state, { payload } ) => {
             state.registeredClients = state.registeredClients.map( client => {
-                if( client.uid === payload.uid ){
+                if( client.id === payload.id ){
                     return payload;
                 }
                 return client;
@@ -35,5 +35,4 @@ export const clientsSlice = createSlice({
 });
 
 
-// Action creators are generated for each case reducer function
 export const { onAddNewClient, onLogout, onUpdateClient, onDeleteClient, setClients } = clientsSlice.actions;

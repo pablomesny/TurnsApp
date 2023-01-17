@@ -1,9 +1,9 @@
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
-import { FirebaseDB } from "../../firebase/config";
+import { FirebaseDB } from "../../firebase";
 import { loadTurns } from "../../helpers";
-import { onAddNewDate, onDeleteWorkDate, onUpdateWorkDate, setTurns } from "./workDatesSlice";
+import { onAddNewTurn, onDeleteTurn, onUpdateTurn, setTurns } from "./turnsSlice";
 
-export const startNewWorkDate = ( turn ) => {
+export const startNewTurn = ( turn ) => {
     return async( dispatch, getState ) => {
 
         const { uid } = getState().auth;
@@ -13,7 +13,7 @@ export const startNewWorkDate = ( turn ) => {
 
         turn.id = newDoc.id;
 
-        dispatch(onAddNewDate(turn));
+        dispatch(onAddNewTurn(turn));
     }
 }
 
@@ -40,7 +40,7 @@ export const startUpdateTurn = ( turn ) => {
         const docRef = doc( FirebaseDB, `${ uid }/turnsapp/turns/${ turn.id }`);
         await setDoc( docRef, turnToFirestore, { merge: true });
 
-        dispatch( onUpdateWorkDate(turn) );
+        dispatch( onUpdateTurn(turn) );
 
     }
 }
@@ -53,7 +53,7 @@ export const startDeleteTurn = ( turn ) => {
         const docRef = doc( FirebaseDB, `${ uid }/turnsapp/turns/${ turn.id }`);
         await deleteDoc(docRef);
 
-        dispatch( onDeleteWorkDate( turn ) );
+        dispatch( onDeleteTurn( turn ) );
 
     }
 }

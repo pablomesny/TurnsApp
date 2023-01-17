@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { LoginPage } from "../auth/pages";
-import { DatesRoutes } from "./DatesRoutes";
-import { PrivateRoutes } from "./PrivateRoutes";
-import { PublicRoutes } from "./PublicRoutes";
+import { PrivateRoutes } from './PrivateRoutes';
+import { PublicRoutes } from './PublicRoutes';
+import { TurnsRoutes } from './TurnsRoutes';
 
 export const AppRouter = () => {
     return (
@@ -11,7 +11,7 @@ export const AppRouter = () => {
                 path="/*"
                 element={
                     <PrivateRoutes>
-                        <DatesRoutes />
+                        <TurnsRoutes />
                     </PrivateRoutes>
                 }
             />

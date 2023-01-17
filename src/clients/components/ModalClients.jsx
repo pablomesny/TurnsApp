@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { clientsFormValidation } from "../helpers";
-import { startNewClient, startUpdateClients } from "../store/clients/thunks";
+import { clientsFormValidation } from "../../helpers";
+import { startNewClient, startUpdateClients } from "../../store/clients/thunks";
 
 const emptyValues = {
     name: '',

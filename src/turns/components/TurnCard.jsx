@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { startDeleteTurn } from "../store/workdates";
-import { ModalDates } from "./ModalDates";
+import { startDeleteTurn } from "../../store/turns";
+import { ModalTurns } from "./ModalTurns";
 
-export const DateCard = ({ date }) => {
+export const TurnCard = ({ turn }) => {
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -14,10 +14,10 @@ export const DateCard = ({ date }) => {
 
     const dispatch = useDispatch();
 
-    const { startDate, price, description, client:{ name, reference, telephoneNumber } } = date;
+    const { date, price, description, client:{ name, reference, telephoneNumber } } = turn;
 
-    const hourFromDate = startDate.split(" ")[4].slice(0, 5);
-    const daysFromDate = new Date(startDate).toLocaleDateString();
+    const hourFromDate = date.split(" ")[4].slice(0, 5);
+    const daysFromDate = new Date(date).toLocaleDateString();
 
     const onDelete = () => {
         Swal.fire({
@@ -29,7 +29,7 @@ export const DateCard = ({ date }) => {
             confirmButtonText: "Eliminar",
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(startDeleteTurn(date));
+                dispatch(startDeleteTurn(turn));
             }
         });
     };
@@ -94,8 +94,8 @@ export const DateCard = ({ date }) => {
             </section>
             
 
-            <ModalDates
-                initialState={date}
+            <ModalTurns
+                initialState={turn}
                 isOpenModal={isOpenModal}
                 handleOpenModal={handleOpenModal}
             />

@@ -1,19 +1,19 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { ClientsPage } from "../clients/pages"
 import { NavBar } from "../components"
-import { DatesPage } from "../dates/pages"
+import { TurnsPage } from "../turns/pages"
 
-export const DatesRoutes = () => {
+export const TurnsRoutes = () => {
   return (
     <>
     <NavBar />
     <Routes>
 
-
-        <Route path="dates" element={ <DatesPage /> } />
+        <Route path="turns" element={ <TurnsPage /> } />
         <Route path="clients" element={ <ClientsPage /> } />
 
-        <Route path="/" element={ <Navigate to="/dates" /> } />
+        <Route path="/" element={ <Navigate to="/turns" /> } />
+
     </Routes>
     </>
   )

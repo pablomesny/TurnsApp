@@ -7,6 +7,6 @@ export const PublicRoutes = ({ children }) => {
 
     return ( status !== 'authenticated' )
     ? children
-    : <Navigate to="/dates" />
+    : <Navigate to="/turns" />
 
 }

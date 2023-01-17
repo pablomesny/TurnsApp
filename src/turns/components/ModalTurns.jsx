@@ -5,11 +5,11 @@ import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
-import { SelectInputList } from "./SelectInputList";
 import { setHours, setMinutes } from "date-fns";
-import { startNewWorkDate, startUpdateTurn } from "../store/workdates";
-import { turnsFormValidation } from "../helpers";
-import { startLoadingClients } from "../store/clients";
+import { startNewTurn, startUpdateTurn } from "../../store/turns";
+import { turnsFormValidation } from "../../helpers";
+import { startLoadingClients } from "../../store/clients";
+import { SelectInputList } from "./SelectInputList";
 
 registerLocale("es", es);
 
@@ -29,19 +29,19 @@ const excludedTimes = () => {
 }
 
 const emptyValues = {
-    startDate: new Date(),
+    date: new Date(),
     client: '',
     price: '',
     description: ''
 };
 
-export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type }) => {
+export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type }) => {
 
     const dispatch = useDispatch();
 
     const { registeredClients } = useSelector( state => state.clients );
 
-    const [datesFormValue, setDatesFormValue] = useState( 
+    const [turnsFormValue, setTurnsFormValue] = useState( 
         type === 'new' 
             ? emptyValues
             : initialState
@@ -66,37 +66,37 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
     };
     
     const onDateInputChange = (e, name) => {
-        setDatesFormValue({
-            ...datesFormValue,
+        setTurnsFormValue({
+            ...turnsFormValue,
             [name]: e.toString()
         });
     }
 
     const onInputChange = ({ target }) => {
         if( target.name === 'client' ){
-            setDatesFormValue({
-                ...datesFormValue,
+            setTurnsFormValue({
+                ...turnsFormValue,
                 [target.name]: JSON.parse(target.value)
             })
             return;
         }
         
-        setDatesFormValue({
-            ...datesFormValue,
+        setTurnsFormValue({
+            ...turnsFormValue,
             [target.name]: target.value
         })
     }
 
     const onSubmit = () => {
-        if( turnsFormValidation(datesFormValue) ) return;
+        if( turnsFormValidation(turnsFormValue) ) return;
 
-        if(!!datesFormValue.id) {
-            dispatch( startUpdateTurn( datesFormValue ) );
+        if(!!turnsFormValue.id) {
+            dispatch( startUpdateTurn( turnsFormValue ) );
         } else {
-            dispatch( startNewWorkDate( datesFormValue ) );
+            dispatch( startNewTurn( turnsFormValue ) );
         }
 
-        setDatesFormValue(emptyValues);
+        setTurnsFormValue(emptyValues);
 
         handleOpenModal();
     }  
@@ -132,13 +132,13 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
                         <DatePicker
                             showTimeSelect
                             timeCaption="Hora"
-                            name="startDate"
+                            name="date"
                             placeholderText="Inicio del turno"
                             locale="es"
                             dateFormat="Pp"
                             className="form-control"
-                            onChange={ e => onDateInputChange(e, "startDate") }
-                            selected={ Date.parse(datesFormValue.startDate) }
+                            onChange={ e => onDateInputChange(e, "date") }
+                            selected={ Date.parse(turnsFormValue.date) }
                             minDate={ new Date() }
                             startDate={ new Date() }
                             filterDate={ isWeekday }
@@ -156,7 +156,7 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
                             Cliente
                         </label>
 
-                        <SelectInputList selectedClient={datesFormValue.client} onInputChange={ onInputChange } />
+                        <SelectInputList selectedClient={turnsFormValue.client} onInputChange={ onInputChange } />
 
                     </div>
                     <div
@@ -172,7 +172,7 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
                             className="form-control" 
                             type="number" 
                             name="price"
-                            value={ datesFormValue.price }
+                            value={ turnsFormValue.price }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -191,7 +191,7 @@ export const ModalDates = ({ initialState, isOpenModal, handleOpenModal, type })
                             className="form-control h-100" 
                             name="description" 
                             placeholder="Ingrese una descripción"
-                            value={ datesFormValue.description }
+                            value={ turnsFormValue.description }
                             onChange={ onInputChange }
                         />
                     </div>

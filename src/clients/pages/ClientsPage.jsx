@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ClientList, ModalClients } from "../../components";
 import { login } from "../../store";
 import { startLoadingClients } from "../../store/clients/thunks";
-
-// TODO: Resolver doble login desde thunk de auth y useEffect de este componente
+import { ClientList, ModalClients } from "../components";
 
 export const ClientsPage = () => {
 

@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice, clientsSlice, uiSlice, workDatesSlice } from "./";
+import { authSlice, clientsSlice, turnsSlice, uiSlice } from "./";
 
 export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
         clients: clientsSlice.reducer,
-        workDates: workDatesSlice.reducer,
+        turns: turnsSlice.reducer,
         ui: uiSlice.reducer,
     },
 });

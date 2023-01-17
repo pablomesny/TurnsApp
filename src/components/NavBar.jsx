@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { onResetDate } from '../store';
-import { startLogout } from '../store/auth/thunks';
+import { startLogout } from '../store/auth';
 
 export const NavBar = () => {
 
@@ -51,7 +50,7 @@ export const NavBar = () => {
                                 `nav-link ${isActive ? 'active' : ''}`
                                 }
                                 aria-current="page"
-                                to="/dates"
+                                to="/turns"
                             >
                                 Turnos
                             </NavLink>
