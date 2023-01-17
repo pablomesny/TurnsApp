@@ -118,7 +118,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={onSubmit} onKeyDown={onPressEnter}>
+                <form id='turnsForm' onSubmit={onSubmit} onKeyDown={onPressEnter}>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"
                     >
@@ -201,7 +201,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                 <Button variant="secondary" onClick={handleOpenModal}>
                     Cerrar
                 </Button>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" form='turnsForm'>
                     Guardar
                 </Button>
             </Modal.Footer>

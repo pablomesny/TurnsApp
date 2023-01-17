@@ -57,7 +57,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                 <Modal.Title>CLIENTE</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={onSubmit} onKeyDown={onPressEnter}>
+                <form id='clientsForm' onSubmit={onSubmit} onKeyDown={onPressEnter}>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"
                     >
@@ -112,7 +112,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                 <Button variant="secondary" onClick={handleOpenModal}>
                     Cerrar
                 </Button>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" form='clientsForm'>
                     Guardar
                 </Button>
             </Modal.Footer>
