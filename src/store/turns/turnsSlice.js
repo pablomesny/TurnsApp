@@ -3,12 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 export const turnsSlice = createSlice({
     name: 'turns',
     initialState: {
-        isSaving: false,
+        isLoading: true,
         registeredTurns: [],
     },
     reducers: {
         setTurns: ( state, { payload } ) => {
             state.registeredTurns = payload;
+            state.isLoading = false;
         },
         onAddNewTurn: ( state, { payload } ) => {
             state.registeredTurns.push( payload );

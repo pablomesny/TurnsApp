@@ -12,7 +12,7 @@ export const ClientsPage = () => {
     const [clientsFilter, setClientsFilter] = useState('');
 
     const { status } = useSelector( state => state.auth );
-    const { registeredClients } = useSelector( state => state.clients)
+    const { registeredClients, isLoading } = useSelector( state => state.clients)
 
     useEffect(() => {
         if( registeredClients.length === 0 ){
@@ -63,6 +63,9 @@ export const ClientsPage = () => {
                     </div>
                 </div>
             </main>
+
+            {/* LOADING SPINNER */}
+            <div className={ isLoading ? "lds-facebook" : "d-none"}><div></div><div></div><div></div></div>
 
             <ModalClients
                 isOpenModal={isOpenModal}

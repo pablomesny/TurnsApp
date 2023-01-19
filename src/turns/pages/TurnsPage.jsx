@@ -18,7 +18,7 @@ export const TurnsPage = () => {
 
     const { actualDate } = useSelector((state) => state.ui);
     const { status } = useSelector( state => state.auth );
-    const { registeredTurns } = useSelector( state => state.turns);
+    const { registeredTurns, isLoading } = useSelector( state => state.turns);
 
     const [formValue, setFormValue] = useState({});
 
@@ -101,6 +101,9 @@ export const TurnsPage = () => {
                     </div>
                 </div>
             </main>
+
+            {/* LOADING SPINNER */}
+            <div className={ isLoading ? "lds-facebook" : "d-none"}><div></div><div></div><div></div></div>
 
             <ModalTurns
                 isOpenModal={isOpenModal}

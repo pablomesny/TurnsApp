@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const clientsSlice = createSlice({
     name: 'clients',
     initialState: {
-        isLoadingClients: false,
+        isLoading: true,
         registeredClients: [],
     },
     reducers: {
@@ -13,7 +13,6 @@ export const clientsSlice = createSlice({
             state.registeredClients.push(payload);
         },
         onLogout: ( state ) => {
-            state.isLoadingClients = false;
             state.registeredClients = [];
             state.activeClient = {};
         },
@@ -30,6 +29,7 @@ export const clientsSlice = createSlice({
         },
         setClients: ( state, { payload } ) => {
             state.registeredClients = payload;
+            state.isLoading = false;
         }
     }
 });
