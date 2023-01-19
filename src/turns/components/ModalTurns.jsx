@@ -5,35 +5,23 @@ import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
-import { setHours, setMinutes } from "date-fns";
 import { startNewTurn, startUpdateTurn } from "../../store/turns";
-import { turnsFormValidation } from "../../helpers";
+import { excludedTimes, filterPassedTime, isWeekday, turnsFormValidation } from "../../helpers";
 import { startLoadingClients } from "../../store/clients";
 import { SelectInputList } from "./SelectInputList";
+import { useTurnsForm } from "../../hooks/useTurnsForm";
 
 registerLocale("es", es);
 
-const excludedTimes = () => {
-    let timesList = [];
-
-    for( let i = 0; i < 25; i++ ){
-        if(i < 7 || i > 16){
-
-            timesList.push(setHours(setMinutes(new Date(), 0), i));
-            timesList.push(setHours(setMinutes(new Date(), 30), i));
-
-        }
-    }
-
-    return timesList;
-}
-
 const emptyValues = {
-    date: new Date(),
+    date: Date.parse(new Date()),
     client: '',
     price: '',
     description: ''
 };
+
+// TODO: CORREGIR TIPO DE DATO EN FECHA, CAMBIAR CUANDO SE SUBA AL ESTADO POR .TOSTRING()
+
 
 export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type }) => {
 
@@ -41,70 +29,47 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
 
     const { registeredClients } = useSelector( state => state.clients );
 
-    const [turnsFormValue, setTurnsFormValue] = useState( 
+    const { formState, onInputChange, onResetForm } = useTurnsForm(
         type === 'new' 
             ? emptyValues
             : initialState
-     );
+    );
+
+    const { date, client, price, description } = formState;
 
     useEffect(() => {
       if( registeredClients.length === 0 ) {
         dispatch(startLoadingClients())
       }
     }, []);
-    
-    const isWeekday = (date) => {
-        const day = date.getDay();
-        return day !== 0 && day !== 6;
-    };
 
-    const filterPassedTime = (time) => {
-      const currentDate = new Date();
-      const selectedDate = new Date(time);
-    
-      return currentDate.getTime() < selectedDate.getTime();
-    };
-    
-    const onDateInputChange = (e, name) => {
-        setTurnsFormValue({
-            ...turnsFormValue,
-            [name]: e.toString()
-        });
-    }
+    const onSubmit = (e) => {
 
-    const onInputChange = ({ target }) => {
-        if( target.name === 'client' ){
-            setTurnsFormValue({
-                ...turnsFormValue,
-                [target.name]: JSON.parse(target.value)
-            })
-            return;
-        }
-        
-        setTurnsFormValue({
-            ...turnsFormValue,
-            [target.name]: target.value
-        })
-    }
+        e.preventDefault();
 
-    const onSubmit = () => {
-        if( turnsFormValidation(turnsFormValue) ) return;
+        if( turnsFormValidation(formState) ) return;
 
-        if(!!turnsFormValue.id) {
-            dispatch( startUpdateTurn( turnsFormValue ) );
+        if(!!formState.id) {
+            dispatch( startUpdateTurn({
+                ...formState,
+                date: formState.date.toString()
+            }) );
         } else {
-            dispatch( startNewTurn( turnsFormValue ) );
+            dispatch( startNewTurn({
+                ...formState,
+                date: formState.date.toString()
+            }) );
         }
 
-        setTurnsFormValue(emptyValues);
+        onResetForm();
 
         handleOpenModal();
-    }  
-
+    } 
+    
     const onPressEnter = (e) => {
-        if( e.key === 'Enter' ) onSubmit();
+        if( e.key === 'Enter' ) onSubmit(e);
     }
-
+    
     return (
         <Modal 
             show={isOpenModal} 
@@ -123,7 +88,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                         className="d-flex align-items-center mt-2 mb-2"
                     >
                         <label 
-                            htmlFor="startDate"
+                            htmlFor="date"
                             className="w-100"
                         >
                             Fecha y hora de inicio
@@ -137,8 +102,8 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             locale="es"
                             dateFormat="Pp"
                             className="form-control"
-                            onChange={ e => onDateInputChange(e, "date") }
-                            selected={ Date.parse(turnsFormValue.date) }
+                            onChange={ e => onInputChange(e, "date") }
+                            selected={ date }
                             minDate={ new Date() }
                             startDate={ new Date() }
                             filterDate={ isWeekday }
@@ -156,7 +121,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             Cliente
                         </label>
 
-                        <SelectInputList selectedClient={turnsFormValue.client} onInputChange={ onInputChange } />
+                        <SelectInputList selectedClient={client} onInputChange={ onInputChange } />
 
                     </div>
                     <div
@@ -172,7 +137,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             className="form-control" 
                             type="number" 
                             name="price"
-                            value={ turnsFormValue.price }
+                            value={ price }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -191,7 +156,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             className="form-control h-100" 
                             name="description" 
                             placeholder="Ingrese una descripción"
-                            value={ turnsFormValue.description }
+                            value={ description }
                             onChange={ onInputChange }
                         />
                     </div>

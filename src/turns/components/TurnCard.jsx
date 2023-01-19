@@ -6,13 +6,13 @@ import { ModalTurns } from "./ModalTurns";
 
 export const TurnCard = ({ turn }) => {
 
+    const dispatch = useDispatch();
+
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const handleOpenModal = () => {
         setIsOpenModal((prev) => !prev);
     };
-
-    const dispatch = useDispatch();
 
     const { date, price, description, client:{ name, reference, telephoneNumber } } = turn;
 
@@ -95,7 +95,10 @@ export const TurnCard = ({ turn }) => {
             
 
             <ModalTurns
-                initialState={turn}
+                initialState={{
+                    ...turn,
+                    date: Date.parse(turn.date)
+                }}
                 isOpenModal={isOpenModal}
                 handleOpenModal={handleOpenModal}
             />

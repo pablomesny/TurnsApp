@@ -28,7 +28,10 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
         });
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+
+        e.preventDefault();
+
         if( clientsFormValidation(clientsFormValue) ) return;
 
         if(!!clientsFormValue.id) {
@@ -43,7 +46,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
     }
 
     const onPressEnter = (e) => {
-        if( e.key === 'Enter' ) onSubmit();
+        if( e.key === 'Enter' ) onSubmit(e);
     }
 
     return (
