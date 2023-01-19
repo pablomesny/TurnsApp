@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { clientsFormValidation } from "../../helpers";
-import { useTurnsForm } from "../../hooks/useTurnsForm";
-import { startNewClient, startUpdateClients } from "../../store/clients/thunks";
+import { useForm } from "../../hooks";
+import { startNewClient, startUpdateClients } from "../../store/clients";
 
 const emptyValues = {
     name: '',
@@ -16,7 +15,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
 
     const dispatch = useDispatch();
 
-    const { formState, onInputChange, onResetForm} = useTurnsForm(
+    const { formState, onInputChange, onResetForm} = useForm(
         type === 'new' 
             ? emptyValues 
             : initialState

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store";
-import { startLoadingClients } from "../../store/clients/thunks";
+import { startLoadingClients } from "../../store/clients";
 import { ClientList, ModalClients } from "../components";
 
 export const ClientsPage = () => {

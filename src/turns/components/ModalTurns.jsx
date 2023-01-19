@@ -1,15 +1,15 @@
+import { useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker, { registerLocale } from "react-datepicker";
-import es from "date-fns/locale/es";
-
-import "react-datepicker/dist/react-datepicker.css";
-import { useEffect, useState } from "react";
 import { startNewTurn, startUpdateTurn } from "../../store/turns";
 import { excludedTimes, filterPassedTime, isWeekday, turnsFormValidation } from "../../helpers";
 import { startLoadingClients } from "../../store/clients";
 import { SelectInputList } from "./SelectInputList";
-import { useTurnsForm } from "../../hooks/useTurnsForm";
+import { useForm } from "../../hooks";
+import es from "date-fns/locale/es";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 registerLocale("es", es);
 
@@ -20,16 +20,13 @@ const emptyValues = {
     description: ''
 };
 
-// TODO: CORREGIR TIPO DE DATO EN FECHA, CAMBIAR CUANDO SE SUBA AL ESTADO POR .TOSTRING()
-
-
 export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type }) => {
 
     const dispatch = useDispatch();
 
     const { registeredClients } = useSelector( state => state.clients );
 
-    const { formState, onInputChange, onResetForm } = useTurnsForm(
+    const { formState, onInputChange, onResetForm } = useForm(
         type === 'new' 
             ? emptyValues
             : initialState

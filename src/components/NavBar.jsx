@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { startLogout } from '../store/auth';
+import Swal from 'sweetalert2';
 
 export const NavBar = () => {
 

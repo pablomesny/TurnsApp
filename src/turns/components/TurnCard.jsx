@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
 import { startDeleteTurn } from "../../store/turns";
 import { ModalTurns } from "./ModalTurns";
+import Swal from "sweetalert2";
 
 export const TurnCard = ({ turn }) => {
 

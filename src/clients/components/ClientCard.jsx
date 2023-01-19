@@ -6,13 +6,13 @@ import Swal from "sweetalert2";
 
 export const ClientCard = ({ client }) => {
 
+    const dispatch = useDispatch();
+
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const handleOpenModal = () => {
         setIsOpenModal( prev => !prev );
     }
-
-    const dispatch = useDispatch();
 
     const { name, reference, telephoneNumber, email } = client;
 

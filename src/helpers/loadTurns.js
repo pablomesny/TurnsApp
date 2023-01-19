@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore/lite";
-import { FirebaseDB } from "../firebase/config";
+import { FirebaseDB } from "../firebase";
 
 export const loadTurns = async( uid = '' ) => {
     

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useTurnsForm = ( initialForm = {} ) => {
+export const useForm = ( initialForm = {} ) => {
 
     const [ formState, setFormState ] = useState( initialForm );
 
