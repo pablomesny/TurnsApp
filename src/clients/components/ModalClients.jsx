@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { clientsFormValidation } from "../../helpers";
+import { useTurnsForm } from "../../hooks/useTurnsForm";
 import { startNewClient, startUpdateClients } from "../../store/clients/thunks";
 
 const emptyValues = {
@@ -15,32 +16,27 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
 
     const dispatch = useDispatch();
 
-    const [clientsFormValue, setClientsFormValue] = useState( 
+    const { formState, onInputChange, onResetForm} = useTurnsForm(
         type === 'new' 
             ? emptyValues 
             : initialState
-    );
-  
-    const onInputChange = ({ target }) => {
-        setClientsFormValue({
-            ...clientsFormValue,
-            [target.name]: target.value
-        });
-    }
+    )
+
+    const { name, reference, telephoneNumber, email } = formState;
 
     const onSubmit = (e) => {
 
         e.preventDefault();
 
-        if( clientsFormValidation(clientsFormValue) ) return;
+        if( clientsFormValidation(formState) ) return;
 
-        if(!!clientsFormValue.id) {
-            dispatch( startUpdateClients( clientsFormValue ) );
+        if(!!formState.id) {
+            dispatch( startUpdateClients( formState ) );
         } else {
-            dispatch( startNewClient( clientsFormValue ) );
+            dispatch( startNewClient( formState ) );
         }
 
-        setClientsFormValue(emptyValues);
+        onResetForm();
 
         handleOpenModal();
     }
@@ -60,7 +56,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                 <Modal.Title>CLIENTE</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form id='clientsForm' onSubmit={onSubmit} onKeyDown={onPressEnter}>
+                <form id='clientsForm' onSubmit={onSubmit} onKeyDown={onPressEnter} noValidate>
                     <div
                         className="d-flex align-items-center mt-2 mb-2"
                     >
@@ -69,7 +65,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                             className="form-control" 
                             type="text" 
                             name="name" 
-                            value={ clientsFormValue.name }
+                            value={ name }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -81,7 +77,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                             className="form-control" 
                             type="text" 
                             name="reference" 
-                            value={ clientsFormValue.reference }
+                            value={ reference }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -93,7 +89,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                             className="form-control" 
                             type="number" 
                             name="telephoneNumber" 
-                            value={ clientsFormValue.telephoneNumber }
+                            value={ telephoneNumber }
                             onChange={ onInputChange }
                         />
                     </div>
@@ -105,7 +101,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
                             className="form-control" 
                             type="email" 
                             name="email" 
-                            value={ clientsFormValue.email }
+                            value={ email }
                             onChange={ onInputChange }
                         />
                     </div>
