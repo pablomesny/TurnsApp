@@ -24,6 +24,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
 
     const dispatch = useDispatch();
 
+    const { registeredTurns } = useSelector( state => state.turns );
     const { registeredClients } = useSelector( state => state.clients );
 
     const { formState, onInputChange, onResetForm } = useForm(
@@ -44,7 +45,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
 
         e.preventDefault();
 
-        if( turnsFormValidation(formState) ) return;
+        if( turnsFormValidation(formState, registeredTurns) ) return;
 
         if(!!formState.id) {
             dispatch( startUpdateTurn({

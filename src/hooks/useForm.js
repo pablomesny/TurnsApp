@@ -6,7 +6,7 @@ export const useForm = ( initialForm = {} ) => {
 
 	const onInputChange = (e, name = e.target.name) => {
 
-        if( name === 'date' ){
+        if( name === 'date' ) {
             setFormState({
                 ...formState,
                 [name]: e
