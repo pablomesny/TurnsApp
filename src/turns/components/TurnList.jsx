@@ -15,11 +15,17 @@ export const TurnList = () => {
     );
 
     return (
-        <>
-            {sortedTurns.length > 0 &&
-                sortedTurns.map((turn) => (
-                    <TurnCard key={turn.id} turn={turn} />
-                ))}
-        </>
+            <section className="container pt-2 pb-2 mw-100">
+                <div className="row d-flex justify-content-center mt-3">
+
+                    {
+                        sortedTurns.length > 0 &&
+                            sortedTurns.map((turn) => (
+                                <TurnCard key={turn.id} turn={turn} />
+                            ))
+                    }
+
+                </div>
+            </section>
     );
 };

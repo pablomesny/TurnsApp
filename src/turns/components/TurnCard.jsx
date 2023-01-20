@@ -36,28 +36,32 @@ export const TurnCard = ({ turn }) => {
 
     return (
         <>
-            <section className="container pt-2 pb-2 mw-100">
+
                 {/* GENERAL ROW */}
-                <article className="row">
+                <article className="turn-card mb-4 p-4">
+                    <div className="col-12">
+                        <div className="container mw-100">
+                            <div className="row">
+
                     <div className="col-3">
                         {/* FIRST TEXT ROW */}
                         <div className="row">
                             <div className="col-12">
-                                <h2>
+                                <h3>
                                     {daysFromDate} - {hourFromDate}
-                                </h2>
+                                </h3>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <p>
+                                <h4>
                                     Cliente: {name} - {reference}
-                                </p>
+                                </h4>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-12">
-                                <p>Teléfono: {telephoneNumber}</p>
+                                <h4>Teléfono: {telephoneNumber}</h4>
                             </div>
                         </div>
                     </div>
@@ -65,10 +69,10 @@ export const TurnCard = ({ turn }) => {
                     <div className="col-7">
                         <div className="row h-100">
                             <div className="col-12 align-self-start">
-                                <p>Descripcion: {description}</p>
+                                <h4>Descripción: {description}</h4>
                             </div>
                             <div className="col-12 align-self-end">
-                                <p>Presupuesto: ${price}</p>
+                                <h4>Presupuesto: { price === '' ? 'Sin definir' : `$ ${ price }` }</h4>
                             </div>
                         </div>
                     </div>
@@ -90,8 +94,10 @@ export const TurnCard = ({ turn }) => {
                             </div>
                         </div>
                     </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
-            </section>
             
 
             <ModalTurns

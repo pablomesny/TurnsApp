@@ -55,7 +55,7 @@ export const TurnsPage = () => {
 
     return (
         <>
-            <main className="container">
+            <main className="container mb-2">
                 <div className="row">
                     <div className="col-3">
                         <h2 className="py-4">TURNOS</h2>

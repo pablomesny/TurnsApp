@@ -33,8 +33,9 @@ export const ClientCard = ({ client }) => {
 
     return (
         <>
-            <article className="col-3 mt-3 mb-3">
-                <h2 className="d-flex justify-content-center mb-4">
+            <article className="col-3 mt-3 mb-3 d-flex justify-content-center">
+                <div className="client-card p-3">
+                <h2 className="d-flex justify-content-center mb-4 d-inline-block pb-3">
                     {name.toUpperCase()}
                 </h2>
                 <h4 className="fs-5">Referencia: {reference}</h4>
@@ -45,6 +46,7 @@ export const ClientCard = ({ client }) => {
                     <button onClick={onDelete} className="btn btn-danger">
                         Eliminar
                     </button>
+                </div>
                 </div>
             </article>
 

@@ -28,7 +28,7 @@ export const NavBar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">
+                <Link className="navbar-brand navbar-text-title" to="/">
                     { displayName }
                 </Link>
                 <button
@@ -47,7 +47,7 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <NavLink 
                                 className={ ({isActive}) =>
-                                `nav-link ${isActive ? 'active' : ''}`
+                                `nav-link ${isActive ? 'active navbar-text' : 'navbar-text'}`
                                 }
                                 aria-current="page"
                                 to="/turns"
@@ -58,7 +58,7 @@ export const NavBar = () => {
                         <li className="nav-item">
                             <NavLink 
                                 className={ ({isActive}) =>
-                                    `nav-link ${isActive ? 'active' : ''}`
+                                    `nav-link ${isActive ? 'active navbar-text' : 'navbar-text'}`
                                 }
                                 aria-current="page"
                                 to="/clients"
