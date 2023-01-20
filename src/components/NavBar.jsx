@@ -28,7 +28,7 @@ export const NavBar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-                <Link className="navbar-brand navbar-text-title" to="/">
+                <Link className="navbar-brand navbar-text-title ms-2" to="/">
                     { displayName }
                 </Link>
                 <button
@@ -69,7 +69,7 @@ export const NavBar = () => {
                     </ul>
                     <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
                     <button 
-                        className="btn btn-danger"
+                        className="btn btn-danger me-2"
                         onClick={ onLogout }
                     >
                         LOGOUT

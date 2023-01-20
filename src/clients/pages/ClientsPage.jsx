@@ -65,7 +65,9 @@ export const ClientsPage = () => {
             </main>
 
             {/* LOADING SPINNER */}
-            <div className={ isLoading ? "lds-facebook" : "d-none"}><div></div><div></div><div></div></div>
+            <div className="d-flex justify-content-center mt-5">
+                <div className={ isLoading ? "lds-facebook" : "d-none"}><div></div><div></div><div></div></div>
+            </div>
 
             <ModalClients
                 isOpenModal={isOpenModal}

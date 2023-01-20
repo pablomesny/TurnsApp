@@ -103,7 +103,9 @@ export const TurnsPage = () => {
             </main>
 
             {/* LOADING SPINNER */}
-            <div className={ isLoading ? "lds-facebook" : "d-none"}><div></div><div></div><div></div></div>
+            <div className="d-flex justify-content-center mt-5">
+                <div className={ isLoading ? "lds-facebook" : "d-none"}><div></div><div></div><div></div></div>
+            </div>
 
             <ModalTurns
                 isOpenModal={isOpenModal}
