@@ -14,10 +14,7 @@ export const TurnCard = ({ turn }) => {
         setIsOpenModal((prev) => !prev);
     };
 
-    const { date, price, description } = turn;
-
-    const parsedClient = JSON.parse(turn.client);
-    const { name, reference, telephoneNumber } = parsedClient;
+    const { date, price, description, client: { name, reference, telephoneNumber } } = turn;
 
     const hourFromDate = date.split(" ")[4].slice(0, 5);
     const daysFromDate = new Date(date).toLocaleDateString();

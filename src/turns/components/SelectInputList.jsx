@@ -9,7 +9,7 @@ export const SelectInputList = ({ selectedClient = {}, onInputChange }) => {
         className="form-control" 
         name="client"
         onChange={ onInputChange }
-        value={ selectedClient }
+        value={ typeof selectedClient === 'object' ? JSON.stringify(selectedClient) : selectedClient }
     >
         <option value="">Seleccione un cliente</option>
         {
