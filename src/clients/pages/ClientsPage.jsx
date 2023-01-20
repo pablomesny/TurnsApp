@@ -37,7 +37,7 @@ export const ClientsPage = () => {
 
     return (
         <>
-            <main className="container">
+            <main className="container mb-2 mt-2">
                 <div className="row">
                     <div className="col-5">
                         <h2 className="py-4">CLIENTES</h2>
