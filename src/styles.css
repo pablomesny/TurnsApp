@@ -112,7 +112,6 @@ input[placeholder='Filtrar clientes por nombre...'] {
     width: 95%;
     border: solid black 3px;
     border-radius: 25px;
-    box-shadow: 2px 2px 2px black;
 }
 
 .client-list .row {
