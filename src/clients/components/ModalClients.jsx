@@ -52,7 +52,9 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title>CLIENTE</Modal.Title>
+                <Modal.Title>
+                    { type === 'new' ? 'CREAR CLIENTE' : 'MODIFICAR CLIENTE' }
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form id='clientsForm' onSubmit={onSubmit} onKeyDown={onPressEnter} noValidate>

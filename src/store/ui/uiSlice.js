@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        actualDate: new Date().toLocaleDateString(),
+        actualDate: []
     },
     reducers: {
         onSetActualDate: ( state, { payload } ) => {

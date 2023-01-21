@@ -11,7 +11,7 @@ export const turnsFormValidation = ( formValues, registeredTurns ) => {
 
     const validDate = dateHour >= 7 && dateHour <= 16 && (dateMinutes === 30 || dateMinutes === 0) && dateSeconds === 0;
 
-    if ( client === '' || description === '' ) {
+    if ( date === '' || client === '' || description === '' ) {
         Swal.fire( 'Error', 'Completar todos los campos obligatorios', 'error');
         return true;
     }

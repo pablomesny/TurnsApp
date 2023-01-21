@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 registerLocale("es", es);
 
 const emptyValues = {
-    date: Date.parse(new Date()),
+    date: '',
     client: '',
     price: '',
     description: ''
@@ -78,7 +78,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
         >
             <Modal.Header closeButton>
                 <Modal.Title>
-                    TURNO
+                    { type === 'new' ? 'CREAR TURNO' : 'MODIFICAR TURNO' }
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -108,6 +108,8 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             filterDate={ isWeekday }
                             filterTime={ filterPassedTime }
                             excludeTimes={ excludedTimes() }
+                            autoComplete='off'
+                            isClearable={true}
                         />
                     </div>
                     <div

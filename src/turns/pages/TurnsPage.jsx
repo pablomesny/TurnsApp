@@ -20,7 +20,8 @@ export const TurnsPage = () => {
     const { status } = useSelector( state => state.auth );
     const { registeredTurns, isLoading } = useSelector( state => state.turns);
 
-    const [formValue, setFormValue] = useState({});
+    const [formValue, setFormValue] = useState([ null, null ]);
+    const [ startDate, endDate ] = formValue;
 
     useEffect(() => {
         if( registeredTurns.length === 0 ){
@@ -35,17 +36,16 @@ export const TurnsPage = () => {
         }
     }, []);
 
-    const onInputChange = (e, name) => {
-        setFormValue({
-            ...formValue,
-            [name]: e,
-        });
+    const onInputChange = (e) => {
+        setFormValue(e);
     };
 
-    const onDateSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        if(formValue.date === undefined) return;
-        dispatch(onSetActualDate(formValue.date.toLocaleDateString()));
+
+        if(startDate === null) return;
+
+        dispatch(onSetActualDate([ startDate.toLocaleDateString(), endDate.toLocaleDateString() ]));
     };
 
 
@@ -62,25 +62,26 @@ export const TurnsPage = () => {
                     </div>
 
                     <div className="col-3">
-                        <h3 className="py-4">{actualDate}</h3>
+                        <h3 className="py-4">{ !!actualDate[0] ? actualDate[0] : 'Próximos turnos' }{ !!actualDate[1] ? ` - ${actualDate[1]}` : '' }</h3>
                     </div>
 
-                    <form className="col-3" onSubmit={onDateSubmit}>
+                    <form className="col-3" onSubmit={onSubmit}>
                         <div className="container">
                             <div className="row">
                                 <div className="col-9 d-flex align-items-center">
                                     <DatePicker
                                         className="my-4 date-search"
                                         placeholderText="Ingrese una fecha..."
-                                        selected={formValue.date}
                                         locale="es"
                                         dateFormat="dd/MM/yyyy"
                                         name="date"
-                                        onChange={(e) =>
-                                            onInputChange(e, "date")
-                                        }
+                                        onChange={ (e) => onInputChange(e)}
+                                        selectsRange={true}
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        isClearable={true}
                                         autoComplete="off"
-                                    />
+                                        />
                                 </div>
                                 <div className="col-3">
                                     <button type="submit" className=" my-4">
