@@ -24,9 +24,13 @@ export const turnsSlice = createSlice({
         },
         onDeleteTurn: ( state, { payload } ) => {
             state.registeredTurns = state.registeredTurns.filter( turn => turn.id !== payload.id );
+        },
+        onResetTurns: ( state ) => {
+            state.isLoading = true;
+            state.registeredTurns = [];
         }
     },
 });
 
 
-export const { onAddNewTurn, onUpdateTurn, onDeleteTurn, setTurns } = turnsSlice.actions;
+export const { onAddNewTurn, onUpdateTurn, onDeleteTurn, setTurns, onResetTurns } = turnsSlice.actions;

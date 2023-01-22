@@ -57,7 +57,7 @@ export const TurnsPage = () => {
         <>
             <main className="container mb-2 mt-2">
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-2">
                         <h2 className="py-4">TURNOS</h2>
                     </div>
 
@@ -65,12 +65,12 @@ export const TurnsPage = () => {
                         <h3 className="py-4">{ !!actualDate[0] ? actualDate[0] : 'Próximos turnos' }{ !!actualDate[1] ? ` - ${actualDate[1]}` : '' }</h3>
                     </div>
 
-                    <form className="col-3" onSubmit={onSubmit}>
+                    <form className="col-4" onSubmit={onSubmit}>
                         <div className="container">
                             <div className="row">
                                 <div className="col-9 d-flex align-items-center">
                                     <DatePicker
-                                        className="my-4 date-search"
+                                        className="my-4 date-search form-control"
                                         placeholderText="Ingrese una fecha..."
                                         locale="es"
                                         dateFormat="dd/MM/yyyy"

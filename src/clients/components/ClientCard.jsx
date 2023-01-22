@@ -40,7 +40,7 @@ export const ClientCard = ({ client }) => {
                 </h2>
                 <h4 className="fs-5">Referencia: {reference}</h4>
                 <h4 className="fs-5">Teléfono: {telephoneNumber}</h4>
-                <h4 className="fs-5">Email: {email}</h4>
+                <h4 className="fs-5">Email: {email ? email : 'No registrado'}</h4>
                 <div className="d-flex mt-5 justify-content-around">
                     <button onClick={handleOpenModal}>Modificar</button>
                     <button onClick={onDelete} className="btn btn-danger">

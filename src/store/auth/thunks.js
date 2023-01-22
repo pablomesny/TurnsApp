@@ -1,4 +1,6 @@
 import { logoutFirebase, signInWithGoogle } from "../../firebase";
+import { onResetClients } from "../clients/clientsSlice";
+import { onResetTurns } from "../turns/turnsSlice";
 import { checkingCredentials, login, logout } from "./authSlice"
 
 export const startGoogleSignIn = () => {
@@ -24,6 +26,8 @@ export const startLogout = () => {
         dispatch( logout() );
         localStorage.removeItem('auth');
         dispatch( onResetDate() );
+        dispatch( onResetClients() );
+        dispatch( onResetTurns() );
 
     }
 }

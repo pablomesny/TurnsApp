@@ -74,7 +74,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
         <Modal 
             show={isOpenModal} 
             onHide={handleOpenModal}
-            size="md"
+            size="lg"
             centered
         >
             <Modal.Header closeButton>

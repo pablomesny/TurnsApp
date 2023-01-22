@@ -30,9 +30,13 @@ export const clientsSlice = createSlice({
         setClients: ( state, { payload } ) => {
             state.registeredClients = payload;
             state.isLoading = false;
+        },
+        onResetClients: ( state ) => {
+            state.isLoading = true;
+            state.registeredClients = [];
         }
     }
 });
 
 
-export const { onAddNewClient, onLogout, onUpdateClient, onDeleteClient, setClients } = clientsSlice.actions;
+export const { onAddNewClient, onLogout, onUpdateClient, onDeleteClient, setClients, onResetClients } = clientsSlice.actions;
