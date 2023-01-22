@@ -9,15 +9,9 @@ export const TurnList = () => {
 
     const filteredTurns = () => {
 
-        if( actualDate.length === 0 ) {
-            console.log('filtrado proximos');
-            return registeredTurns.filter( turn => Date.parse(turn.date) > new Date().getTime());
-        }
+        if( actualDate.length === 0 ) return registeredTurns.filter( turn => Date.parse(turn.date) > new Date().getTime());
 
-        if( actualDate[0] && !actualDate[1] ) {
-            console.log('filtrado una sola fecha')
-            return registeredTurns.filter( turn => new Date(turn.date).toLocaleDateString() === actualDate[0] );
-        }
+        if( actualDate[0] && !actualDate[1] ) return registeredTurns.filter( turn => new Date(turn.date).toLocaleDateString() === actualDate[0] );
 
         const reversedDate = (date) => {
 
@@ -32,6 +26,7 @@ export const TurnList = () => {
 
             return reversedDate;
         }
+
         
         return registeredTurns.filter( turn => 
             new Date(turn.date) >= new Date(`${reversedDate(actualDate[0])}T00:00`) 

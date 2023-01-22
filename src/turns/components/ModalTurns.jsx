@@ -34,7 +34,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
             : initialState
     );
 
-    const { date, client, price, description } = formState;
+    const { date, price, description } = formState;
 
     useEffect(() => {
       if( registeredClients.length === 0 ) {
@@ -125,6 +125,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
 
                         <Select
                             className='w-100'
+                            placeholder='Seleccione un cliente'
                             options={ selectOptions(registeredClients) }
                             onChange={ e => onInputChange(e, "client") }
                         />
