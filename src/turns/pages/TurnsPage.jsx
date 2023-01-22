@@ -45,7 +45,7 @@ export const TurnsPage = () => {
 
         if(startDate === null) return;
 
-        dispatch(onSetActualDate([ startDate.toLocaleDateString(), endDate.toLocaleDateString() ]));
+        dispatch(onSetActualDate([ startDate.toLocaleDateString(), endDate?.toLocaleDateString() ]));
     };
 
 
