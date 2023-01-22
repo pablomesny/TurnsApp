@@ -14,6 +14,14 @@ export const useForm = ( initialForm = {} ) => {
             return;
         }
 
+        if( name === 'client' ) {
+            setFormState({
+                ...formState,
+                [name]: e.value
+            })
+            return;
+        }
+
 		setFormState({
 			...formState,
 			[ name ]: e.target.value

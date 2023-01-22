@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker, { registerLocale } from "react-datepicker";
+import Select from 'react-select';
 import { startNewTurn, startUpdateTurn } from "../../store/turns";
-import { excludedTimes, filterPassedTime, isWeekday, turnsFormValidation } from "../../helpers";
+import { excludedTimes, filterPassedTime, isWeekday, selectOptions, turnsFormValidation } from "../../helpers";
 import { startLoadingClients } from "../../store/clients";
 import { SelectInputList } from "./SelectInputList";
 import { useForm } from "../../hooks";
@@ -23,7 +24,7 @@ const emptyValues = {
 export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type }) => {
 
     const dispatch = useDispatch();
-
+    
     const { registeredTurns } = useSelector( state => state.turns );
     const { registeredClients } = useSelector( state => state.clients );
 
@@ -122,7 +123,11 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             Cliente
                         </label>
 
-                        <SelectInputList selectedClient={client} onInputChange={ onInputChange } />
+                        <Select
+                            className='w-100'
+                            options={ selectOptions(registeredClients) }
+                            onChange={ e => onInputChange(e, "client") }
+                        />
 
                     </div>
                     <div
