@@ -4,12 +4,13 @@ export const turnsFormValidation = ( formValues, registeredTurns ) => {
 
     const { date, client, description } = formValues;
 
+    const dateDay = new Date(date).getDay();
     const dateTime = new Date(date).toLocaleTimeString().split(':');
     const dateHour = Number(dateTime[0]);
     const dateMinutes = Number(dateTime[1]);
     const dateSeconds = Number(dateTime[2]);
 
-    const validDate = dateHour >= 7 && dateHour <= 16 && (dateMinutes === 30 || dateMinutes === 0) && dateSeconds === 0;
+    const validDate = dateHour >= 7 && dateHour <= 16 && (dateMinutes === 30 || dateMinutes === 0) && dateSeconds === 0 && dateDay !== 0 && dateDay !== 6;
 
     if ( date === '' || client === '' || description === '' ) {
         Swal.fire( 'Error', 'Completar todos los campos obligatorios', 'error');
