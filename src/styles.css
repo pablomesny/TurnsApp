@@ -158,6 +158,14 @@ input[placeholder='Filtrar clientes por nombre...'] {
     height: 36px;
 }
 
+.modal-opacity-0 {
+    opacity: 0;
+}
+
+.modal-opacity-100 {
+    opacity: 100;
+}
+
 /* SPINNER CLASSES */
 
 .lds-facebook {

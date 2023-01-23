@@ -11,7 +11,7 @@ const emptyValues = {
     email: ''
 }
 
-export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type }) => {
+export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type, backdrop }) => {
 
     const dispatch = useDispatch();
 
@@ -50,6 +50,7 @@ export const ModalClients = ({ initialState, isOpenModal, handleOpenModal, type 
             onHide={handleOpenModal}
             size="lg"
             centered
+            backdrop={ backdrop ? "static" : "false"}
         >
             <Modal.Header closeButton>
                 <Modal.Title>
