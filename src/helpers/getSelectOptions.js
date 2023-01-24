@@ -1,4 +1,4 @@
-export const selectOptions = (registeredClients) => {
+export const getSelectOptions = (registeredClients) => {
 
     let options = [];
 

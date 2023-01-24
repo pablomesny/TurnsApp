@@ -5,7 +5,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import Select from 'react-select';
 import { ModalClients } from '../../clients/components'
 import { startNewTurn, startUpdateTurn } from "../../store/turns";
-import { excludedTimes, filterPassedTime, isWeekday, selectOptions, turnsFormValidation } from "../../helpers";
+import { excludedTimes, filterPassedTime, getIndex, getSelectOptions, isWeekday, turnsFormValidation } from "../../helpers";
 import { startLoadingClients } from "../../store/clients";
 import { useForm } from "../../hooks";
 import es from "date-fns/locale/es";
@@ -36,7 +36,10 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
 
     const [ isOpenModalClients, setIsOpenModalClients ] = useState(false);
 
-    const { date, price, description } = formState;
+    const { date, client, price, description } = formState;
+
+    const selectOptions = getSelectOptions(registeredClients);
+    const indexOfClient = getIndex( selectOptions, client );
 
     useEffect(() => {
       if( registeredClients.length === 0 ) {
@@ -138,8 +141,9 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                             <Select
                                 className='w-100'
                                 placeholder='Seleccione un cliente'
-                                options={ selectOptions(registeredClients) }
+                                options={ selectOptions }
                                 onChange={ e => onInputChange(e, "client") }
+                                defaultValue={ indexOfClient >= 0 ? selectOptions[indexOfClient] : '' }
                             />
 
                         </div>
