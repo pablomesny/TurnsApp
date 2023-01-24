@@ -38,7 +38,7 @@ export const ClientCard = ({ client }) => {
 
     return (
         <>
-            <article className="col-3 mt-3 mb-3 d-flex justify-content-center">
+            <article className="col-3 mt-3 mb-3 d-flex justify-content-center bg-green">
                 <div className="client-card p-3">
                     <h2 className="d-flex justify-content-center mb-4 d-inline-block pb-3">
                         {name.toUpperCase()}

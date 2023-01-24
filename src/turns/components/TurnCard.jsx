@@ -38,7 +38,7 @@ export const TurnCard = ({ turn }) => {
         <>
 
                 {/* GENERAL ROW */}
-                <article className="turn-card mb-4 p-4">
+                <article className="turn-card bg-green mb-4 p-4">
                     <div className="col-12">
                         <div className="container mw-100">
                             <div className="row">

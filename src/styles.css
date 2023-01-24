@@ -37,11 +37,11 @@ textarea {
     height: 2rem;
 }
 
-article {
+.bg-green {
     background-color: #004643;
 }
 
-section {
+.card-section {
     max-width: 100%;
     background-color: #abd1c6;
     color: #fffffe;
@@ -164,6 +164,10 @@ input[placeholder='Filtrar clientes por nombre...'] {
 
 .modal-opacity-100 {
     opacity: 100;
+}
+
+.height-350 {
+    height: 350px;
 }
 
 /* SPINNER CLASSES */
