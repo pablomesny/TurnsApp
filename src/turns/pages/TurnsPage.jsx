@@ -43,7 +43,7 @@ export const TurnsPage = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if(startDate === null) return;
+        if( startDate === null ) return dispatch(onSetActualDate([]));
 
         dispatch(onSetActualDate([ startDate.toLocaleDateString(), endDate?.toLocaleDateString() ]));
     };
