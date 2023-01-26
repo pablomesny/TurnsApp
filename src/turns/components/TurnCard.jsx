@@ -48,7 +48,7 @@ export const TurnCard = ({ turn }) => {
                         <div className="row">
                             <div className="col-12">
                                 <h3>
-                                    {daysFromDate} - {hourFromDate}
+                                    {hourFromDate}
                                 </h3>
                             </div>
                         </div>

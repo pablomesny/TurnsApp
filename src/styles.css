@@ -41,6 +41,20 @@ textarea {
     background-color: #004643;
 }
 
+.date-divider {
+    width: 90%;
+    text-align: center;
+    border-bottom: 3px solid black;
+    line-height: 0.1rem;
+    margin: 10px 0 20px;
+}
+
+.date-divider span {
+    background-color: #abd1c6;
+    padding: 0 10px;
+    font-size: 2rem;
+}
+
 .card-section {
     max-width: 100%;
     background-color: #abd1c6;

@@ -28,6 +28,8 @@ export const splitTurnsByDate = ( dates = [] , turns ) => {
 
     } 
 
+    if( turns.length === 0 ) return;
+
     if( dates.length === 0 ){
 
         turns.forEach( turn => {
@@ -103,5 +105,4 @@ export const splitTurnsByDate = ( dates = [] , turns ) => {
     }
     
     return organizedTurns;
-
 }
