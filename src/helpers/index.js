@@ -7,5 +7,5 @@ export * from './getSelectOptions';
 export * from './filterDataBetweenDates';
 export * from './stringDateToLocaleDate';
 export * from './getDaysBetweenDates';
-export * from './splitCardsByDate';
+export * from './splitTurnsByDate';
 export * from './getIndex';
