@@ -2,8 +2,6 @@ import { getDaysBetweenDates } from '.';
 
 export const splitTurnsByDate = ( dates = [] , turns ) => {
 
-    console.log({ dates, cards: turns });
-
     const [ startDate, stopDate ] = dates;
 
     let organizedTurns = [];
