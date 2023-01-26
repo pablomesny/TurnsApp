@@ -102,7 +102,6 @@ export const splitTurnsByDate = ( dates = [] , turns ) => {
         organizedTurns = organizedTurns.sort( (a, b) => localeDateToParse(a.date) - localeDateToParse(b.date) );
     }
     
-    console.log(organizedTurns)
     return organizedTurns;
 
 }
