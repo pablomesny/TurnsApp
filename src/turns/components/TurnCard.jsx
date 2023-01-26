@@ -41,9 +41,9 @@ export const TurnCard = ({ turn }) => {
                 <article className="turn-card bg-green mb-4 p-4">
                     <div className="col-12">
                         <div className="container mw-100">
-                            <div className="row">
+                            <div className="row d-flex justify-content-center">
 
-                    <div className="col-3">
+                    <div className="col-12 col-md-3">
                         {/* FIRST TEXT ROW */}
                         <div className="row">
                             <div className="col-12">
@@ -66,7 +66,7 @@ export const TurnCard = ({ turn }) => {
                         </div>
                     </div>
                     {/* MIDDLE TEXT ROW */}
-                    <div className="col-7">
+                    <div className="col-12 col-md-7">
                         <div className="row h-100">
                             <div className="col-12 align-self-start">
                                 <h4>Descripción: {description}</h4>
@@ -76,9 +76,9 @@ export const TurnCard = ({ turn }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-2">
+                    <div className="col-12 col-md-2">
                         {/* BUTTONS ROW */}
-                        <div className="row h-100 align-items-center">
+                        <div className="row h-100 align-items-center gap-2">
                             <div className="col-12 d-flex justify-content-center">
                                 <button onClick={handleOpenModal}>
                                     Modificar

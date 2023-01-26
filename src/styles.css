@@ -165,19 +165,11 @@ input[placeholder='Filtrar clientes por nombre...'] {
 
 .btn-danger {
     padding: 4px;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .date-search {
     height: 36px;
-}
-
-.modal-opacity-0 {
-    opacity: 0;
-}
-
-.modal-opacity-100 {
-    opacity: 100;
 }
 
 .height-350 {

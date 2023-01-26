@@ -57,15 +57,15 @@ export const TurnsPage = () => {
         <>
             <main className="container mb-2 mt-2">
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-12 col-md-2">
                         <h2 className="py-4">TURNOS</h2>
                     </div>
 
-                    <div className="col-3">
+                    <div className="col-12 col-md-3">
                         <h3 className="py-4">{ !!actualDate[0] ? actualDate[0] : 'Próximos turnos' }{ !!actualDate[1] ? ` - ${actualDate[1]}` : '' }</h3>
                     </div>
 
-                    <form className="col-4" onSubmit={onSubmit}>
+                    <form className="col-12 col-md-4" onSubmit={onSubmit}>
                         <div className="container">
                             <div className="row">
                                 <div className="col-9 d-flex align-items-center">
@@ -92,7 +92,7 @@ export const TurnsPage = () => {
                         </div>
                     </form>
 
-                    <div className="col-3 d-flex justify-content-end h-100">
+                    <div className="col-12 col-md-3 d-flex justify-content-end h-100">
                         <button
                             className="my-4 w-100"
                             onClick={handleOpenModal}

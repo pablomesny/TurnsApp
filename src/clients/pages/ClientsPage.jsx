@@ -39,11 +39,11 @@ export const ClientsPage = () => {
         <>
             <main className="container mb-2 mt-2">
                 <div className="row">
-                    <div className="col-5">
+                    <div className="col-12 col-md-5">
                         <h2 className="py-4">CLIENTES</h2>
                     </div>
 
-                    <div className="col-4 d-flex justify-content-end">
+                    <div className="col-12 col-md-4 d-flex justify-content-end">
                         <input
                             className="w-100 my-4"
                             type="text"
@@ -53,7 +53,7 @@ export const ClientsPage = () => {
                         />
                     </div>
 
-                    <div className="col-3 d-flex justify-content-end h-100">
+                    <div className="col-12 col-md-3 d-flex justify-content-end h-100">
                         <button
                             className="my-4 w-100"
                             onClick={handleOpenModal}

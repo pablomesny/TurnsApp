@@ -86,7 +86,7 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
                 onHide={handleOpenModal}
                 size="lg"
                 centered
-                className={ isOpenModalClients ? "modal-opacity-0 " : "modal-opacity-100" }
+                className={ isOpenModalClients ? "d-none" : "d-block" }
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
