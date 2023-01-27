@@ -5,10 +5,14 @@
     border-spacing: 0;
 }
 
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    min-height: 100vh;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
     background-color: #abd1c6;
     padding-right: 0 !important;
@@ -19,6 +23,7 @@ nav {
 }
 
 main {
+    border: 0;
     width: 100%;
     background-color: #abd1c6;
     color: #001e1d;
@@ -41,8 +46,12 @@ textarea {
     background-color: #004643;
 }
 
+.date-record-date {
+    height: 2rem;
+}
+
 .date-divider {
-    width: 90%;
+    width: 40%;
     text-align: center;
     border-bottom: 3px solid black;
     line-height: 0.1rem;
@@ -53,6 +62,11 @@ textarea {
     background-color: #abd1c6;
     padding: 0 10px;
     font-size: 2rem;
+}
+
+.date-divider .date-divider-dateRecords {
+    background-color: #fff;
+    font-size: 1rem;
 }
 
 .card-section {
@@ -95,25 +109,13 @@ input[placeholder='Filtrar clientes por nombre...'] {
 }
 
 .login-container {
-    min-height: 100vh;
+    min-height: 50vh;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    background: rgb(0, 70, 67);
-    background: radial-gradient(
-        circle,
-        rgba(0, 70, 67, 1) 0%,
-        rgba(0, 0, 0, 1) 100%,
-        rgba(2, 177, 232, 1) 100%,
-        rgba(3, 158, 220, 1) 100%,
-        rgba(4, 130, 202, 1) 100%,
-        rgba(9, 9, 121, 1) 100%,
-        rgba(5, 96, 179, 1) 100%,
-        rgba(0, 212, 255, 1) 100%
-    );
+    width: 100%;
 }
 
 .login-container h1 {
@@ -132,6 +134,23 @@ input[placeholder='Filtrar clientes por nombre...'] {
 .login-container button {
     height: 50px;
     color: #001e1d;
+}
+
+.login-page {
+    background-image: linear-gradient(to right top, #004643, #013c39, #013230, #012827, #011f1e);
+    border: 0;
+    min-height: 100vh;
+}
+
+.login-page-div {
+    min-height: 50vh;
+}
+
+.login-title {
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1px;
+    font-size: calc(2rem + 8vw);
+    color: white;
 }
 
 .turn-card {

@@ -17,7 +17,6 @@ export const TurnCard = ({ turn }) => {
     const { date, price, description, client: { name, reference, telephoneNumber } } = turn;
 
     const hourFromDate = date.split(" ")[4].slice(0, 5);
-    const daysFromDate = new Date(date).toLocaleDateString();
 
     const onDelete = () => {
         Swal.fire({

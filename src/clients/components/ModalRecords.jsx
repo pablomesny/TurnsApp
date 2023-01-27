@@ -1,12 +1,13 @@
+import React from 'react'
 import { useSelector } from "react-redux"
 import { useForm } from "../../hooks/useForm";
 import { Button, Modal } from "react-bootstrap";
-import { filterDataBetweenDates, getDaysBetweenDates, stringDateToLocaleDate } from "../../helpers";
+import { splitTurnsByDate } from "../../helpers";
+import { RecordList } from './RecordList';
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { RecordItem } from "./RecordItem";
 
 registerLocale("es", es);
 
@@ -21,11 +22,9 @@ export const ModalRecords = ({ isOpenRecordsModal, handleOpenRecordsModal, clien
 
     const [ startDate, endDate ] = formState.date;
 
-    const dateArray = getDaysBetweenDates( startDate, endDate );
-
     const turnsRecord = registeredTurns.filter( turn => turn.client.id === client.id);
-    const turnsFilteredByDate = filterDataBetweenDates( stringDateToLocaleDate(formState.date), turnsRecord );
-    const turnsFiltered = turnsFilteredByDate.filter( turn => turn.description.toLowerCase().includes( formState.description.toLowerCase() ) );
+    const filteredTurns = splitTurnsByDate( formState.date, turnsRecord);
+    console.log(filteredTurns)
 
   return (
     <Modal 
@@ -76,16 +75,20 @@ export const ModalRecords = ({ isOpenRecordsModal, handleOpenRecordsModal, clien
             <section className="mt-3">
 
                 {
-                    turnsFiltered.length === 0 &&
+                    filteredTurns.length === 0 &&
                         <h4>
                             No se registran turnos
                         </h4>
                 }
 
                 {
-                    turnsFiltered &&
-                        turnsFiltered.map( turn => (
-                            <RecordItem key={ turn.id } {...turn}/>
+                    filteredTurns &&
+                        filteredTurns.map( (date, index) => (
+                            <React.Fragment key={ index }>
+                                <h4 key={ date.date } className="date-record-date d-flex w-100 justify-content-center"><div className="date-divider"><span className="date-divider-dateRecords">{ date.date }</span></div></h4>
+                                  
+                                <RecordList key={ date.turns[0].date } turns={ date.turns } />  
+                            </React.Fragment>
                         ) )
                 }
 

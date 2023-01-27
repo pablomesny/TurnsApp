@@ -28,9 +28,9 @@ export const splitTurnsByDate = ( dates = [] , turns ) => {
 
     } 
 
-    if( turns.length === 0 ) return;
+    if( turns.length === 0 ) return [];
 
-    if( dates.length === 0 ){
+    if( dates.length === 0 || !dates[0] ){
 
         turns.forEach( turn => {
 
@@ -65,10 +65,13 @@ export const splitTurnsByDate = ( dates = [] , turns ) => {
 
         const turnsFiltered = turns.filter( turn => dateToLocaleString(turn.date) === startDate);
 
-        organizedTurns = {
-            date: startDate,
-            turns: turnsFiltered
+        if( turnsFiltered.length > 0){
+            organizedTurns = [{
+                date: startDate,
+                turns: turnsFiltered
+            }]
         }
+
 
         return organizedTurns;
     }

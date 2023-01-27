@@ -38,9 +38,6 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
 
     const { date, client, price, description } = formState;
 
-    const selectOptions = getSelectOptions(registeredClients);
-    const indexOfClient = getIndex( selectOptions, client );
-
     useEffect(() => {
       if( registeredClients.length === 0 ) {
         dispatch(startLoadingClients())
@@ -78,6 +75,9 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
     const handleOpenClientsModal = () => {
         setIsOpenModalClients( prev => !prev );
     }
+
+    const selectOptions = getSelectOptions(registeredClients);
+    const indexOfClient = getIndex( selectOptions, client );
     
     return (
         <>
