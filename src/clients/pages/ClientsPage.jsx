@@ -45,7 +45,7 @@ export const ClientsPage = () => {
 
                     <div className="col-12 col-md-4 d-flex justify-content-end">
                         <input
-                            className="w-100 my-4"
+                            className="my-4 form-control"
                             type="text"
                             placeholder="Filtrar clientes por nombre..."
                             value={ clientsFilter }

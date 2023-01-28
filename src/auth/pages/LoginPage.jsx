@@ -22,7 +22,7 @@ export const LoginPage = () => {
                         Turns <span className="d-block">App</span>
                     </h1>
                 </div>
-                <div className="col-12 col-md-6 p-0 align-items-center justify-content-center login-page-div">
+                <div className="col-12 col-md-6 p-0 align-items-center justify-content-center login-page-div animate__animated animate__slow animate__fadeIn">
                     <LoginContainer />
                 </div>
             </div>

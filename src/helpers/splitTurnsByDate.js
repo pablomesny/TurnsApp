@@ -1,6 +1,6 @@
 import { getDaysBetweenDates } from '.';
 
-export const splitTurnsByDate = ( dates = [] , turns ) => {
+export const splitTurnsByDate = ( dates = [] , turns, type ) => {
 
     const [ startDate, stopDate ] = dates;
 
@@ -28,7 +28,38 @@ export const splitTurnsByDate = ( dates = [] , turns ) => {
 
     } 
 
-    if( turns.length === 0 ) return [];
+    if( turns.length === 0 ) return organizedTurns;
+
+    if( !dates[0] && type === 'record' ){
+
+        turns.forEach( turn => {
+
+            if( findDateIndex(dateToLocaleString(turn.date)) === -1 ){
+                organizedTurns = [
+                    ...organizedTurns,
+                    {
+                        date: dateToLocaleString(turn.date),
+                        turns: [
+                            turn
+                        ]
+                    }
+                ]
+
+                return;
+            }
+            
+            if( findDateIndex(dateToLocaleString(turn.date)) !== -1 ){
+                organizedTurns[findDateIndex(dateToLocaleString(turn.date))].turns.push( turn );
+            }
+            
+        })
+        
+        if( organizedTurns.length > 1 ){
+            organizedTurns = organizedTurns.sort( (a, b) => localeDateToParse(a.date) - localeDateToParse(b.date) );
+        }
+
+        return organizedTurns;
+    }
 
     if( dates.length === 0 || !dates[0] ){
 

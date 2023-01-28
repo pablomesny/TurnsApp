@@ -23,8 +23,7 @@ export const ModalRecords = ({ isOpenRecordsModal, handleOpenRecordsModal, clien
     const [ startDate, endDate ] = formState.date;
 
     const turnsRecord = registeredTurns.filter( turn => turn.client.id === client.id);
-    const filteredTurns = splitTurnsByDate( formState.date, turnsRecord);
-    console.log(filteredTurns)
+    const filteredTurns = splitTurnsByDate( formState.date, turnsRecord, 'record' );
 
   return (
     <Modal 

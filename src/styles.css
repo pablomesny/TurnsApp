@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    border: 0;
     box-sizing: border-box;
     border-spacing: 0;
 }
@@ -23,7 +24,6 @@ nav {
 }
 
 main {
-    border: 0;
     width: 100%;
     background-color: #abd1c6;
     color: #001e1d;
@@ -138,7 +138,6 @@ input[placeholder='Filtrar clientes por nombre...'] {
 
 .login-page {
     background-image: linear-gradient(to right top, #004643, #013c39, #013230, #012827, #011f1e);
-    border: 0;
     min-height: 100vh;
 }
 
