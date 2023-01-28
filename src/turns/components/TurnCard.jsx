@@ -68,7 +68,7 @@ export const TurnCard = ({ turn }) => {
                     <div className="col-12 col-md-7">
                         <div className="row h-100">
                             <div className="col-12 align-self-start">
-                                <h4>Descripción: {description}</h4>
+                                <h4 className="text-break">Descripción: {description}</h4>
                             </div>
                             <div className="col-12 align-self-end">
                                 <h4>Presupuesto: { price === '' ? 'Sin definir' : `$ ${ price }` }</h4>

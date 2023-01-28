@@ -7,7 +7,7 @@ export const RecordList = ({ turns }) => {
 
   return (
     <section className="container mb-2 mw-100 card-section-records">
-            <div className="row d-flex justify-content-center mt-3">
+            <div className="row d-flex justify-content-center mt-3 mb-3">
                 <div className="col-12">
                     {
                         sortedTurns &&

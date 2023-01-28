@@ -42,7 +42,7 @@ export const ModalRecords = ({ isOpenRecordsModal, handleOpenRecordsModal, clien
             className="height-350"
         >
             <div className="container">
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col-6">
                         <input 
                             className="form-control"
@@ -71,12 +71,12 @@ export const ModalRecords = ({ isOpenRecordsModal, handleOpenRecordsModal, clien
                     </div>
                 </div>
             </div>
-            <section className="mt-3">
+            <section className="modal-records pt-4">
 
                 {
                     filteredTurns.length === 0 &&
-                        <h4>
-                            No se registran turnos
+                        <h4 className="text-center">
+                            No se registran turnos.
                         </h4>
                 }
 
@@ -84,9 +84,17 @@ export const ModalRecords = ({ isOpenRecordsModal, handleOpenRecordsModal, clien
                     filteredTurns &&
                         filteredTurns.map( (date, index) => (
                             <React.Fragment key={ index }>
-                                <h4 key={ date.date } className="date-record-date d-flex w-100 justify-content-center"><div className="date-divider"><span className="date-divider-dateRecords">{ date.date }</span></div></h4>
+                                <h4 
+                                    key={ date.date } 
+                                    className="date-record-date d-flex w-100 justify-content-start m-0"
+                                >
+                                    <div className="date-divider w-100">
+                                        <span className="date-divider-dateRecords">{ date.date }</span>
+                                    </div>
+                                </h4>
                                   
                                 <RecordList key={ date.turns[0].date } turns={ date.turns } />  
+
                             </React.Fragment>
                         ) )
                 }

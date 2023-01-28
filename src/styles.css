@@ -46,6 +46,10 @@ textarea {
     background-color: #004643;
 }
 
+section.modal-records {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .date-record-date {
     height: 2rem;
 }
@@ -69,7 +73,8 @@ textarea {
 
 .date-divider .date-divider-dateRecords {
     background-color: #fff;
-    font-size: 1rem;
+    font-size: 1.3rem;
+    font-weight: 800;
 }
 
 .card-section {
