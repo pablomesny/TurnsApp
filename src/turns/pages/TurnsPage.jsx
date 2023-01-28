@@ -16,12 +16,12 @@ export const TurnsPage = () => {
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const { actualDate } = useSelector((state) => state.ui);
+    const { actualDate } = useSelector( state => state.ui );
     const { status } = useSelector( state => state.auth );
-    const { registeredTurns, isLoading } = useSelector( state => state.turns);
+    const { registeredTurns, isLoading } = useSelector( state => state.turns );
 
-    const [formValue, setFormValue] = useState([ null, null ]);
-    const [ startDate, endDate ] = formValue;
+    const [ dateFilter, setDateFilter ] = useState([ null, null ]);
+    const [ startDate, endDate ] = dateFilter;
 
     useEffect(() => {
         if( registeredTurns.length === 0 ){
@@ -37,7 +37,7 @@ export const TurnsPage = () => {
     }, []);
 
     const onInputChange = (e) => {
-        setFormValue(e);
+        setDateFilter(e);
     };
 
     const onSubmit = (e) => {
