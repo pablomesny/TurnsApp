@@ -51,14 +51,17 @@ textarea {
 }
 
 .date-divider {
-    width: 40%;
-    text-align: center;
+    width: 45%;
+    min-width: 300px;
     border-bottom: 3px solid black;
     line-height: 0.1rem;
     margin: 10px 0 20px;
 }
 
 .date-divider span {
+    position: absolute;
+    height: 2rem;
+    z-index: 9;
     background-color: #abd1c6;
     padding: 0 10px;
     font-size: 2rem;

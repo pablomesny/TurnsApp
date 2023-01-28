@@ -24,7 +24,7 @@ export const TurnsByDateList = () => {
                 dateByTurns.length > 0 &&
                     dateByTurns.map( (date, index) => (
                         <React.Fragment key={index}>
-                            <h4 key={ date.date } className="d-flex w-100 justify-content-center"><div className="date-divider"><span>{ date.date }</span></div></h4>
+                            <h4 key={ date.date } className="d-flex w-100 justify-content-center"><div className="date-divider d-flex justify-content-center"><span>{ date.date }</span></div></h4>
 
                             <TurnList key={ new Date().getTime() } turns={date.turns}/>
                         </React.Fragment>
