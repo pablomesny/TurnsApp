@@ -1,9 +1,9 @@
-import es from "date-fns/locale/es";
 import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select';
+import es from "date-fns/locale/es";
 import { ModalClients } from '../../clients/components';
 import { excludedTimes, filterPassedTime, getIndex, getSelectOptions, isWeekday, turnsFormValidation } from "../../helpers";
 import { useForm } from "../../hooks";

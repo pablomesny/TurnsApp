@@ -1,8 +1,8 @@
-import es from "date-fns/locale/es";
 import React from 'react';
 import { Button, Modal } from "react-bootstrap";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { useSelector } from "react-redux";
+import es from "date-fns/locale/es";
 import { splitTurnsByDate } from "../../helpers";
 import { useForm } from "../../hooks/useForm";
 import { RecordList } from './RecordList';

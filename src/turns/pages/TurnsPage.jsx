@@ -1,10 +1,10 @@
-import es from "date-fns/locale/es";
 import { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { login, onSetActualDate } from "../../store";
 import { startLoadingTurns } from "../../store/turns";
 import { ModalTurns, TurnsByDateList } from "../components";
+import es from "date-fns/locale/es";
 
 import "react-datepicker/dist/react-datepicker.css";
 
