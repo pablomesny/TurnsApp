@@ -1,5 +1,5 @@
-import { RecordItem } from "./RecordItem";
 import { compareAsc } from "date-fns";
+import { RecordItem } from "./RecordItem";
 
 export const RecordList = ({ turns }) => {
 

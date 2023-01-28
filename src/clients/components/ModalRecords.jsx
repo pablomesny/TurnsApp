@@ -1,11 +1,11 @@
-import React from 'react'
-import { useSelector } from "react-redux"
-import { useForm } from "../../hooks/useForm";
-import { Button, Modal } from "react-bootstrap";
-import { splitTurnsByDate } from "../../helpers";
-import { RecordList } from './RecordList';
-import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
+import React from 'react';
+import { Button, Modal } from "react-bootstrap";
+import DatePicker, { registerLocale } from "react-datepicker";
+import { useSelector } from "react-redux";
+import { splitTurnsByDate } from "../../helpers";
+import { useForm } from "../../hooks/useForm";
+import { RecordList } from './RecordList';
 
 import "react-datepicker/dist/react-datepicker.css";
 

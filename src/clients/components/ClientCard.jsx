@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { startDeleteClient } from '../../store/clients';
 import { ModalClients } from './ModalClients';
-import Swal from 'sweetalert2';
 import { ModalRecords } from './ModalRecords';
 
 export const ClientCard = ({ client }) => {

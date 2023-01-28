@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// TODO: agregar onLogout cuando kiteas || Payload de initialForm en reset
-
 export const clientsSlice = createSlice({
     name: 'clients',
     initialState: {

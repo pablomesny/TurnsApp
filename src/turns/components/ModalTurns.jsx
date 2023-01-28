@@ -1,14 +1,14 @@
+import es from "date-fns/locale/es";
 import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import DatePicker, { registerLocale } from "react-datepicker";
+import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-select';
-import { ModalClients } from '../../clients/components'
-import { startNewTurn, startUpdateTurn } from "../../store/turns";
+import { ModalClients } from '../../clients/components';
 import { excludedTimes, filterPassedTime, getIndex, getSelectOptions, isWeekday, turnsFormValidation } from "../../helpers";
-import { startLoadingClients } from "../../store/clients";
 import { useForm } from "../../hooks";
-import es from "date-fns/locale/es";
+import { startLoadingClients } from "../../store/clients";
+import { startNewTurn, startUpdateTurn } from "../../store/turns";
 
 import "react-datepicker/dist/react-datepicker.css";
 
