@@ -5,28 +5,27 @@ export const splitTurnsByDate = ( dates = [] , turns, type ) => {
     const [ startDate, stopDate ] = dates;
 
     let organizedTurns = [];
-
-    const todayLocaleString = new Date().toLocaleDateString();
-
+    
     const dateToLocaleString = (date) => new Date(date).toLocaleDateString();
-
+    
     const findDateIndex = (date) => organizedTurns.findIndex( turn => turn.date === date );
-
-
+    
     const localeDateToParse = ( date ) => {
-
+        
         const splitLocaleString = date.split('/');
         let dateWithTime = splitLocaleString;
-
+        
         if( dateWithTime[0].length === 1 ) dateWithTime[0] = `0${dateWithTime[0]}`;
         if( dateWithTime[1].length === 1 ) dateWithTime[1] = `0${dateWithTime[1]}`;
         
         dateWithTime = dateWithTime.reverse().join('-');
         dateWithTime = `${dateWithTime}T00:00:00`;
-
+        
         return Date.parse( new Date(dateWithTime) );
-
+        
     } 
+
+    const todayLocaleString = localeDateToParse(new Date().toLocaleDateString());
 
     if( turns.length === 0 ) return organizedTurns;
 
@@ -65,7 +64,7 @@ export const splitTurnsByDate = ( dates = [] , turns, type ) => {
 
         turns.forEach( turn => {
 
-            if( findDateIndex(dateToLocaleString(turn.date)) === -1 && dateToLocaleString(turn.date) >= todayLocaleString ){
+            if( findDateIndex(dateToLocaleString(turn.date)) === -1 && localeDateToParse(dateToLocaleString(turn.date)) >= todayLocaleString ){
                 organizedTurns = [
                     ...organizedTurns,
                     {
