@@ -53,7 +53,8 @@ export const ModalTurns = ({ initialState, isOpenModal, handleOpenModal, type })
         if(!!formState.id) {
             dispatch( startUpdateTurn({
                 ...formState,
-                date: new Date(formState.date).toString()
+                date: new Date(formState.date).toString(),
+                client: JSON.parse(formState.client)
             }) );
         } else {
             dispatch( startNewTurn({
