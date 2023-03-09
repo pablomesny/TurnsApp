@@ -11,6 +11,6 @@ Si desean utilizarla, estan invitados a acceder al link debajo. El sitio web es 
 
 
 
-Link de la página web: https://turnsapp.netlify.app/turns
+Link de la página web: https://turnsapp.netlify.app/
 
 Tecnologías utilizadas: React, Redux, Firebase.
