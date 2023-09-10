@@ -1,242 +1,262 @@
 * {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    box-sizing: border-box;
-    border-spacing: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  border-spacing: 0;
 }
 
-body, html {
-    margin: 0;
-    padding: 0;
+body,
+html {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    width: 100%;
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-    background-color: #abd1c6;
-    padding-right: 0 !important;
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #abd1c6;
+  padding-right: 0 !important;
 }
 
 nav {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 main {
-    width: 100%;
-    background-color: #abd1c6;
-    color: #001e1d;
-    border-bottom: 4px solid black;
+  width: 100%;
+  background-color: #abd1c6;
+  color: #001e1d;
+  border-bottom: 4px solid black;
 }
 
 button {
-    background-color: #f9bc60;
-    color: #001e1d;
-    border-radius: 5px;
-    padding: 4px;
-    font-weight: 800;
+  background-color: #f9bc60;
+  color: #001e1d;
+  border-radius: 5px;
+  padding: 4px;
+  font-weight: 800;
 }
 
 textarea {
-    height: 2rem;
+  height: 2rem;
 }
 
 .bg-green {
-    background-color: #004643;
+  background-color: #004643;
 }
 
 section.modal-records {
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .date-record-date {
-    height: 2rem;
+  height: 2rem;
 }
 
 .date-divider {
-    width: 45%;
-    min-width: 300px;
-    border-bottom: 3px solid black;
-    line-height: 0.1rem;
-    margin: 10px 0 20px;
+  width: 45%;
+  min-width: 300px;
+  border-bottom: 3px solid black;
+  line-height: 0.1rem;
+  margin: 10px 0 20px;
 }
 
 .date-divider span {
-    position: absolute;
-    height: 2rem;
-    background-color: #abd1c6;
-    padding: 0 10px;
-    font-size: 2rem;
+  position: absolute;
+  height: 2rem;
+  background-color: #abd1c6;
+  padding: 0 10px;
+  font-size: 2rem;
 }
 
 .date-divider .date-divider-dateRecords {
-    background-color: #fff;
-    font-size: 1.3rem;
-    font-weight: 800;
+  background-color: #fff;
+  font-size: 1.3rem;
+  font-weight: 800;
 }
 
 .card-section {
-    max-width: 100%;
-    background-color: #abd1c6;
-    color: #fffffe;
+  max-width: 100%;
+  background-color: #abd1c6;
+  color: #fffffe;
 }
 
 input[placeholder='Filtrar clientes por nombre...'] {
-    height: 2.3rem;
+  height: 2.3rem;
 }
 
 .navbar {
-    background-color: #001e1d !important;
-    border-bottom: 3px solid black;
+  background-color: #001e1d !important;
+  border-bottom: 3px solid black;
 }
 
 .navbar :hover {
-    color: #fafafa;
+  color: #fafafa;
 }
 
 .navbar-toggler {
-    border: 1px solid #fafafa;
+  border: 1px solid #fafafa;
 }
 
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='%23fafafa'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cg clip-path='url(%23fafafaclip0_429_11066)'%3E%3Cpath d='M3 6.00092H21M3 12.0009H21M3 18.0009H21' stroke='%23fafafa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_429_11066'%3E%3Crect width='24' height='24' fill='white' transform='translate(0 0.000915527)'%3E%3C/rect%3E%3C/clipPath%3E%3C/defs%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='%23fafafa'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cg clip-path='url(%23fafafaclip0_429_11066)'%3E%3Cpath d='M3 6.00092H21M3 12.0009H21M3 18.0009H21' stroke='%23fafafa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_429_11066'%3E%3Crect width='24' height='24' fill='white' transform='translate(0 0.000915527)'%3E%3C/rect%3E%3C/clipPath%3E%3C/defs%3E%3C/g%3E%3C/svg%3E");
 }
 
 .navbar-text-title {
-    color: #fafafa;
+  color: #fafafa;
 }
 
 .navbar-text {
-    color: #afafaf;
+  color: #afafaf;
 }
 
 .navbar-text.active {
-    color: #fafafa !important;
+  color: #fafafa !important;
 }
 
 .login-container {
-    min-height: 50vh;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  min-height: 50vh;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .login-container h1 {
-    text-align: center;
-    color: #fffffe;
+  text-align: center;
+  color: #fffffe;
 }
 
 .login-container .row {
-    border: 2px black solid;
-    background-color: #004643;
-    height: 200px;
-    width: 300px;
-    align-items: center;
+  border: 2px black solid;
+  background-color: #004643;
+  height: 200px;
+  width: 300px;
+  align-items: center;
 }
 
 .login-container button {
-    height: 50px;
-    color: #001e1d;
+  height: 50px;
+  color: #001e1d;
 }
 
 .login-page {
-    background-image: linear-gradient(to right top, #004643, #013c39, #013230, #012827, #011f1e);
-    min-height: 100vh;
+  background-image: linear-gradient(
+    to right top,
+    #004643,
+    #013c39,
+    #013230,
+    #012827,
+    #011f1e
+  );
+  min-height: 100vh;
 }
 
 .login-page-div {
-    min-height: 50vh;
+  min-height: 50vh;
 }
 
 .login-title {
-    -webkit-text-stroke-color: black;
-    -webkit-text-stroke-width: 1px;
-    font-size: calc(2rem + 8vw);
-    color: white;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+  font-size: calc(2rem + 8vw);
+  color: white;
 }
 
 .turn-card {
-    width: 95%;
-    border: solid black 3px;
-    border-radius: 25px;
+  width: 95%;
+  border: solid black 3px;
+  border-radius: 25px;
 }
 
 .client-list .row {
-    background-color: #abd1c6;
+  background-color: #abd1c6;
 }
 
 .client-list .row article {
-    background-color: #abd1c6;
+  background-color: #abd1c6;
 }
 
 .client-card {
-    width: 90%;
-    border: solid black 3px;
-    border-radius: 25px;
-    background-color: #004643;
+  width: 90%;
+  border: solid black 3px;
+  border-radius: 25px;
+  background-color: #004643;
 }
 
 .client-card h2 {
-    border-bottom: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .form-description {
-    height: 10rem;
+  height: 10rem;
 }
 
 .btn-danger {
-    padding: 4px;
-    border: 1px solid black;
+  padding: 4px;
+  border: 1px solid black;
 }
 
 .date-search {
-    height: 36px;
+  height: 36px;
 }
 
 .height-350 {
-    height: 350px;
+  height: 350px;
 }
 
 /* SPINNER CLASSES */
 
 .lds-facebook {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
 }
 .lds-facebook div {
-    display: inline-block;
-    position: absolute;
-    left: 8px;
-    width: 16px;
-    background: #fff;
-    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
-    left: 8px;
-    animation-delay: -0.24s;
+  left: 8px;
+  animation-delay: -0.24s;
 }
 .lds-facebook div:nth-child(2) {
-    left: 32px;
-    animation-delay: -0.12s;
+  left: 32px;
+  animation-delay: -0.12s;
 }
 .lds-facebook div:nth-child(3) {
-    left: 56px;
-    animation-delay: 0;
+  left: 56px;
+  animation-delay: 0;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 @keyframes lds-facebook {
-    0% {
-        top: 8px;
-        height: 64px;
-    }
-    50%,
-    100% {
-        top: 24px;
-        height: 32px;
-    }
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
 }

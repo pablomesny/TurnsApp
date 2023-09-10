@@ -1,59 +1,58 @@
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
-import { FirebaseDB } from "../../firebase";
-import { loadTurns } from "../../helpers";
-import { onAddNewTurn, onDeleteTurn, onUpdateTurn, setTurns } from "./turnsSlice";
+import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
+import { FirebaseDB } from '../../firebase';
+import { loadTurns } from '../../helpers';
+import {
+  onAddNewTurn,
+  onDeleteTurn,
+  onUpdateTurn,
+  setTurns
+} from './turnsSlice';
 
-export const startNewTurn = ( turn ) => {
-    return async( dispatch, getState ) => {
+export const startNewTurn = turn => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
 
-        const { uid } = getState().auth;
+    const newDoc = doc(collection(FirebaseDB, `${uid}/turnsapp/turns`));
+    await setDoc(newDoc, turn);
 
-        const newDoc = doc( collection( FirebaseDB, `${ uid }/turnsapp/turns`));
-        await setDoc( newDoc, turn );
+    turn.id = newDoc.id;
 
-        turn.id = newDoc.id;
-
-        dispatch(onAddNewTurn(turn));
-    }
-}
+    dispatch(onAddNewTurn(turn));
+  };
+};
 
 export const startLoadingTurns = () => {
-    return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    if (!uid) throw new Error('El UID del usuario no existe');
 
-        const { uid } = getState().auth;
-        if( !uid ) throw new Error('El UID del usuario no existe');
+    const turns = await loadTurns(uid);
 
-        const turns = await loadTurns(uid);
+    dispatch(setTurns(turns));
+  };
+};
 
-        dispatch(setTurns(turns));
-    }
-}
+export const startUpdateTurn = turn => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
 
-export const startUpdateTurn = ( turn ) => {
-    return async( dispatch, getState ) => {
+    const turnToFirestore = { ...turn };
+    delete turnToFirestore.id;
 
-        const { uid } = getState().auth;
+    const docRef = doc(FirebaseDB, `${uid}/turnsapp/turns/${turn.id}`);
+    await setDoc(docRef, turnToFirestore, { merge: true });
 
-        const turnToFirestore = { ...turn };
-        delete turnToFirestore.id;
+    dispatch(onUpdateTurn(turn));
+  };
+};
 
-        const docRef = doc( FirebaseDB, `${ uid }/turnsapp/turns/${ turn.id }`);
-        await setDoc( docRef, turnToFirestore, { merge: true });
+export const startDeleteTurn = turn => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
 
-        dispatch( onUpdateTurn(turn) );
+    const docRef = doc(FirebaseDB, `${uid}/turnsapp/turns/${turn.id}`);
+    await deleteDoc(docRef);
 
-    }
-}
-
-export const startDeleteTurn = ( turn ) => {
-    return async( dispatch, getState ) => {
-
-        const { uid } = getState().auth;
-
-        const docRef = doc( FirebaseDB, `${ uid }/turnsapp/turns/${ turn.id }`);
-        await deleteDoc(docRef);
-
-        dispatch( onDeleteTurn( turn ) );
-
-    }
-}
+    dispatch(onDeleteTurn(turn));
+  };
+};
