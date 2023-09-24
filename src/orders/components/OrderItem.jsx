@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ModalOrders } from "./ModalOrders";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { startDeleteOrder, startTagAsFinished } from "../../store/orders/thunks";
+import { startTagAsFinished } from "../../store/orders/thunks";
 import { PrintableOrder } from "./PrintableOrder";
 
 export const OrderItem = ({ order }) => {
@@ -32,21 +32,6 @@ export const OrderItem = ({ order }) => {
     }).then(result => {
       if (result.isConfirmed) {
         dispatch(startTagAsFinished(order, isFinished))
-      }
-    })
-  }
-
-  const onDelete = () => {
-    Swal.fire({
-      title: "Eliminar orden",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Eliminar"
-    }).then(result => {
-      if (result.isConfirmed) {
-        dispatch(startDeleteOrder(order))
       }
     })
   }
@@ -102,15 +87,7 @@ export const OrderItem = ({ order }) => {
                       {isFinished ? 'Marcar como no finalizada' : 'Marcar como finalizada'}
                     </button>
                   </div>
-                  <div className="col-12 d-flex justify-content-center">
-                    <button
-                      onClick={onDelete}
-                      className="btn btn-danger"
-                    >
-                      Borrar
-                    </button>
-                  </div>
-                  <div className="col-12 d-flex justify-content-center">
+                  <div className="col-12 d-flex justify-content-center mt-3">
                     <button
                       onClick={() => setOrderToPrint(order)}
                       className="btn btn-secondary"

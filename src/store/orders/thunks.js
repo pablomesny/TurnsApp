@@ -50,17 +50,6 @@ export const startUpdateOrder = order => {
   };
 };
 
-export const startDeleteOrder = order => {
-  return async (dispatch, getState) => {
-    const { uid } = getState().auth;
-
-    const docRef = doc(FirebaseDB, `${uid}/turnsapp/orders/${order.id}`);
-    await deleteDoc(docRef);
-
-    dispatch(onDeleteOrder(order));
-  };
-};
-
 export const startTagAsFinished = (order, isFinished) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
