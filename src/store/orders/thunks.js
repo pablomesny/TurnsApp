@@ -17,6 +17,7 @@ export const startNewOrder = order => {
 
     const orderId = await getAutoincrementId(uid, 'orders');
     order.id = orderId;
+    order.isFinished = false;
 
     await setDoc(newDoc, order);
 
@@ -57,5 +58,16 @@ export const startDeleteOrder = order => {
     await deleteDoc(docRef);
 
     dispatch(onDeleteOrder(order));
+  };
+};
+
+export const startTagAsFinished = (order, isFinished) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+
+    const docRef = doc(FirebaseDB, `${uid}/turnsapp/orders/${order.id}`);
+    await setDoc(docRef, { isFinished: !isFinished }, { merge: true });
+
+    dispatch(onUpdateOrder({ ...order, isFinished: !isFinished }));
   };
 };

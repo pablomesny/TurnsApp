@@ -26,10 +26,16 @@ export const OrdersPage = () => {
   }, []);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isFilteredByFinished, setIsFilteredByFinished] = useState(false);
 
   const handleOpenModal = () => {
     setIsOpenModal(prev => !prev);
   }
+
+  const handleToggleFilter = () => {
+    setIsFilteredByFinished(prev => !prev);
+  }
+
   return (
     <>
       <main className='container mt-2 mb-2'>
@@ -62,11 +68,21 @@ export const OrdersPage = () => {
             </button>
           </div>
         </div>
+        <div className="row mb-3">
+          <div className="col-12 justify-content-center">
+            <div className="d-flex gap-3 border border-2  border-dark ms-auto me-auto ps-3 pe-3 pt-2 pb-2 rounded" style={{ width: 'fit-content' }}>
+              <button style={!isFilteredByFinished ? { fontSize: '1.2rem', padding: '0.5rem', cursor: 'default' } : { fontSize: '1.2rem', padding: '0.5rem', backgroundColor: 'transparent', cursor: 'pointer' }} disabled={!isFilteredByFinished} onClick={handleToggleFilter}>No terminados</button>
+              <span className="border border-1 border-dark"></span>
+              <button style={isFilteredByFinished ? { fontSize: '1.2rem', padding: '0.5rem', cursor: 'default' } : { fontSize: '1.2rem', padding: '0.5rem', backgroundColor: 'transparent', cursor: 'pointer' }} disabled={isFilteredByFinished} onClick={handleToggleFilter}>Terminados</button>
+            </div>
+          </div>
+
+        </div>
       </main>
 
       <ModalOrders isOpenModal={isOpenModal} handleOpenModal={handleOpenModal} />
 
-      <OrdersList />
+      <OrdersList isFilteredByFinished={isFilteredByFinished} />
     </>
   )
 }

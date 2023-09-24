@@ -46,7 +46,8 @@ export const ModalOrders = ({ initialState, isOpenModal, handleOpenModal, type }
       handleOpenModal();
     } else {
       dispatch(startNewOrder({
-        ...formValue
+        ...formValue,
+        isFinished: false
       }))
       onResetForm();
       handleOpenModal();

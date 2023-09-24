@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ModalOrders } from "./ModalOrders";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { startDeleteOrder } from "../../store/orders/thunks";
+import { startDeleteOrder, startTagAsFinished } from "../../store/orders/thunks";
 import { PrintableOrder } from "./PrintableOrder";
 
 export const OrderItem = ({ order }) => {
-  const { name, lastName, phoneNumber, brand, model, defect, id = '' } = order;
+  const { name, lastName, phoneNumber, brand, model, defect, id = '', isFinished } = order;
 
   const dispatch = useDispatch();
 
@@ -19,6 +19,21 @@ export const OrderItem = ({ order }) => {
 
   const handleClearOrderToPrint = () => {
     setOrderToPrint(null);
+  }
+
+  const handleTagAsFinished = () => {
+    Swal.fire({
+      title: `${isFinished ? 'Marcar como no finalizada' : 'Marcar como finalizada'}`,
+      text: `${isFinished ? '¿Está seguro que desea marcar esta orden como no finalizada?' : '¿Está seguro que desea marcar esta orden como finalizada?'}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33"
+    }).then(result => {
+      if (result.isConfirmed) {
+        dispatch(startTagAsFinished(order, isFinished))
+      }
+    })
   }
 
   const onDelete = () => {
@@ -83,8 +98,8 @@ export const OrderItem = ({ order }) => {
                 {/* BUTTONS ROW */}
                 <div className="row h-100 align-items-center gap-2">
                   <div className="col-12 d-flex justify-content-center">
-                    <button onClick={handleOpenModal}>
-                      Modificar
+                    <button onClick={handleTagAsFinished}>
+                      {isFinished ? 'Marcar como no finalizada' : 'Marcar como finalizada'}
                     </button>
                   </div>
                   <div className="col-12 d-flex justify-content-center">
@@ -104,6 +119,17 @@ export const OrderItem = ({ order }) => {
                     </button>
                   </div>
                 </div>
+              </div>
+              <div className="col-12 mt-3">
+                {order.isFinished ? (
+                  <span className="badge bg-success" style={{ fontSize: '1.1rem' }}>
+                    Finalizada
+                  </span>) : (
+                  <span className="badge bg-danger" style={{ fontSize: '1.1rem' }}>
+                    No finalizada
+                  </span>
+                )
+                }
               </div>
             </div>
           </div>

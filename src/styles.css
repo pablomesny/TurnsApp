@@ -6,6 +6,11 @@
   border-spacing: 0;
 }
 
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/fonts/Merriweather.ttf');
+}
+
 body,
 html {
   margin: 0;
