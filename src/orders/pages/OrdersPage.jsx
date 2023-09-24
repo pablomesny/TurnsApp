@@ -37,6 +37,7 @@ export const OrdersPage = () => {
 
   const handleToggleFilter = () => {
     setSearchValue('');
+    searchInputRef.current.value = '';
     setIsFilteredByFinished(prev => !prev);
   }
 
