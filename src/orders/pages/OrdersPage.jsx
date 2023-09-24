@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ModalOrders } from "../components/ModalOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { startLoadingOrders } from "../../store/orders/thunks";
@@ -11,6 +11,12 @@ export const OrdersPage = () => {
 
   const { registeredOrders, isLoading } = useSelector(state => state.orders);
   const { status } = useSelector(state => state.auth);
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isFilteredByFinished, setIsFilteredByFinished] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const searchInputRef = useRef();
 
   useEffect(() => {
     if (registeredOrders.length === 0) {
@@ -25,15 +31,18 @@ export const OrdersPage = () => {
     }
   }, []);
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isFilteredByFinished, setIsFilteredByFinished] = useState(false);
-
   const handleOpenModal = () => {
     setIsOpenModal(prev => !prev);
   }
 
   const handleToggleFilter = () => {
+    setSearchValue('');
     setIsFilteredByFinished(prev => !prev);
+  }
+
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    setSearchValue(searchInputRef.current.value);
   }
 
   return (
@@ -48,10 +57,10 @@ export const OrdersPage = () => {
             <div className="container">
               <div className="row">
                 <div className="col-9">
-                  <input type="text" className="my-4 form-control" placeholder="Buscar.." />
+                  <input ref={searchInputRef} type="text" className="my-4 form-control" placeholder="Buscar.." />
                 </div>
                 <div className="col-3">
-                  <button type="submit" className=" my-4">
+                  <button onClick={handleSubmitSearch} type="submit" className=" my-4">
                     Buscar
                   </button>
                 </div>
@@ -82,7 +91,7 @@ export const OrdersPage = () => {
 
       <ModalOrders isOpenModal={isOpenModal} handleOpenModal={handleOpenModal} />
 
-      <OrdersList isFilteredByFinished={isFilteredByFinished} />
+      <OrdersList isFilteredByFinished={isFilteredByFinished} searchValue={searchValue} />
     </>
   )
 }
