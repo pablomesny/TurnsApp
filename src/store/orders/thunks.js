@@ -16,6 +16,8 @@ export const startNewOrder = order => {
     const newDoc = doc(collection(FirebaseDB, `${uid}/turnsapp/orders`));
 
     const orderId = await getAutoincrementId(uid, 'orders');
+
+    order.id = newDoc.id;
     order.uniqueId = orderId;
     order.isFinished = false;
 

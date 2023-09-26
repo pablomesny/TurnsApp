@@ -19,8 +19,10 @@ export const OrdersPage = () => {
   const searchInputRef = useRef();
 
   useEffect(() => {
-    dispatch(startLoadingOrders());
-  }, [registeredOrders]);
+    if (registeredOrders.length === 0) {
+      dispatch(startLoadingOrders());
+    }
+  }, []);
 
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem("auth"));

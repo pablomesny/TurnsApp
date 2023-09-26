@@ -3,12 +3,12 @@ import { useReactToPrint } from "react-to-print";
 
 export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
 
-  const { name, lastName, phoneNumber, brand, model, defect, id } = order;
+  const { name, lastName, phoneNumber, brand, model, defect, uniqueId } = order;
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: `Orden Nro. ${id} - Electrónica Mesny`,
+    documentTitle: `Orden Nro. ${uniqueId} - Electrónica Mesny`,
     onAfterPrint: () => handleClearOrderToPrint()
   })
 
@@ -29,7 +29,7 @@ export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
         </div>
         <div className="row mt-4">
           <div className="col-12 text-end">
-            <span className="fs-5 me-5">Nro. de Orden: {id}</span>
+            <span className="fs-5 me-5">Nro. de Orden: {uniqueId}</span>
           </div>
         </div>
         <div className="row mt-5">
@@ -62,7 +62,7 @@ export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
         </div>
         <div className="row mt-2">
           <div className="col-12 text-end">
-            <span className="fs-5 me-5">Nro. de Orden: {id}</span>
+            <span className="fs-5 me-5">Nro. de Orden: {uniqueId}</span>
           </div>
         </div>
         <div className="row mt-5">

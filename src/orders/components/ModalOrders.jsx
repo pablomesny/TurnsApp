@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { ordersFormValidation } from '../../helpers/ordersFormValidation';
 import { useDispatch } from 'react-redux';
-import { startNewOrder, startUpdateOrder } from '../../store/orders/thunks';
+import { startLoadingOrders, startNewOrder, startUpdateOrder } from '../../store/orders/thunks';
 
 const emptyValues = {
   name: '',
