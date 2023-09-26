@@ -5,25 +5,25 @@ import { PublicRoutes } from './PublicRoutes';
 import { TurnsRoutes } from './TurnsRoutes';
 
 export const AppRouter = () => {
-    return (
-        <Routes>
-            <Route
-                path="/*"
-                element={
-                    <PrivateRoutes>
-                        <TurnsRoutes />
-                    </PrivateRoutes>
-                }
-            />
+  return (
+    <Routes>
+      <Route
+        path="/*"
+        element={
+          <PrivateRoutes>
+            <TurnsRoutes />
+          </PrivateRoutes>
+        }
+      />
 
-            <Route
-                path="/login"
-                element={
-                    <PublicRoutes>
-                        <LoginPage />
-                    </PublicRoutes>
-                }
-            />
-        </Routes>
-    );
+      <Route
+        path="/login"
+        element={
+          <PublicRoutes>
+            <LoginPage />
+          </PublicRoutes>
+        }
+      />
+    </Routes>
+  );
 };

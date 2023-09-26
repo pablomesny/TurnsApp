@@ -4,7 +4,7 @@ import { OrderItem } from "./OrderItem"
 export const OrdersList = ({ isFilteredByFinished, searchValue }) => {
   const { isLoading, registeredOrders } = useSelector(state => state.orders);
 
-  const sortedOrders = [...registeredOrders].sort((a, b) => b.id - a.id);
+  const sortedOrders = [...registeredOrders].sort((a, b) => b.uniqueId - a.uniqueId);
   const filteredOrders = sortedOrders.filter(order => order.isFinished === isFilteredByFinished);
   const filterBySearch = filteredOrders.filter(order => {
     if (searchValue === '') return order;

@@ -1,59 +1,58 @@
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
-import { FirebaseDB } from "../../firebase/config";
-import { loadClients } from "../../helpers";
-import { onAddNewClient, onDeleteClient, onUpdateClient, setClients } from "./clientsSlice";
+import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
+import { FirebaseDB } from '../../firebase/config';
+import { loadClients } from '../../helpers';
+import {
+  onAddNewClient,
+  onDeleteClient,
+  onUpdateClient,
+  setClients
+} from './clientsSlice';
 
-export const startNewClient = ( client ) => {
-    return async( dispatch, getState ) => {
+export const startNewClient = client => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
 
-        const { uid } = getState().auth;
+    const newDoc = doc(collection(FirebaseDB, `${uid}/turnsapp/clients`));
+    await setDoc(newDoc, client);
 
-        const newDoc = doc( collection( FirebaseDB, `${ uid }/turnsapp/clients`));
-        await setDoc( newDoc, client );
+    client.id = newDoc.id;
 
-        client.id = newDoc.id;
-
-        dispatch(onAddNewClient(client));
-    }
-}
+    dispatch(onAddNewClient(client));
+  };
+};
 
 export const startLoadingClients = () => {
-    return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    if (!uid) throw new Error('El UID del cliente no existe');
 
-        const { uid } = getState().auth;
-        if( !uid ) throw new Error('El UID del cliente no existe');
+    const clients = await loadClients(uid);
 
-        const clients = await loadClients(uid);
+    dispatch(setClients(clients));
+  };
+};
 
-        dispatch(setClients(clients));
-    }
-}
+export const startUpdateClients = client => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
 
-export const startUpdateClients = ( client ) => {
-    return async( dispatch, getState ) => {
+    const clientToFirestore = { ...client };
+    delete clientToFirestore.id;
 
-        const { uid } = getState().auth;
+    const docRef = doc(FirebaseDB, `${uid}/turnsapp/clients/${client.id}`);
+    await setDoc(docRef, clientToFirestore, { merge: true });
 
-        const clientToFirestore = { ...client };
-        delete clientToFirestore.id;
+    dispatch(onUpdateClient(client));
+  };
+};
 
-        const docRef = doc( FirebaseDB, `${ uid }/turnsapp/clients/${ client.id }`);
-        await setDoc( docRef, clientToFirestore, { merge: true });
+export const startDeleteClient = client => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
 
-        dispatch( onUpdateClient(client) );
+    const docRef = doc(FirebaseDB, `${uid}/turnsapp/clients/${client.id}`);
+    await deleteDoc(docRef);
 
-    }
-}
-
-export const startDeleteClient = ( client ) => {
-    return async( dispatch, getState ) => {
-
-        const { uid } = getState().auth;
-
-        const docRef = doc( FirebaseDB, `${ uid }/turnsapp/clients/${ client.id }`);
-        await deleteDoc(docRef);
-
-        dispatch( onDeleteClient( client ) );
-
-    }
-}
+    dispatch(onDeleteClient(client));
+  };
+};

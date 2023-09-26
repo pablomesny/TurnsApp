@@ -6,7 +6,7 @@ import { startTagAsFinished } from "../../store/orders/thunks";
 import { PrintableOrder } from "./PrintableOrder";
 
 export const OrderItem = ({ order }) => {
-  const { name, lastName, phoneNumber, brand, model, defect, id = '', isFinished } = order;
+  const { name, lastName, phoneNumber, brand, model, defect, uniqueId = '', isFinished } = order;
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ export const OrderItem = ({ order }) => {
       cancelButtonColor: "#d33"
     }).then(result => {
       if (result.isConfirmed) {
-        dispatch(startTagAsFinished(order, isFinished))
+        dispatch(startTagAsFinished(order))
       }
     })
   }
@@ -72,7 +72,7 @@ export const OrderItem = ({ order }) => {
               <div className="col-12 col-md-4">
                 <div className="row h-100">
                   <div className="col-12">
-                    <h4 className="text-end">Nro. de Orden: {id}</h4>
+                    <h4 className="text-end">Nro. de Orden: {uniqueId}</h4>
                   </div>
                   <div className="col-12 align-self-end">
                     <h4 className="text-break">Defecto: {defect}</h4>

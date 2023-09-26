@@ -14,7 +14,6 @@ export const TurnsRoutes = () => {
         <Route path="clients" element={<ClientsPage />} />
         <Route path="orders" element={<OrdersPage />} />
 
-        <Route path="/" element={<Navigate to="/turns" />} />
 
       </Routes>
     </>
