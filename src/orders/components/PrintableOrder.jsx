@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 
 export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
 
-  const { name, lastName, phoneNumber, brand, model, defect, uniqueId } = order;
+  const { name, lastName, phoneNumber, brand, model, article = '', defect, uniqueId } = order;
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -33,11 +33,14 @@ export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-6">
+          <div className="col-4">
             <span style={{ fontSize: '1.2rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>Marca:</span> {brand}
           </div>
-          <div className="col-6">
+          <div className="col-4">
             <span style={{ fontSize: '1.2rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>Modelo:</span> {model}
+          </div>
+          <div className="col-4">
+            <span style={{ fontSize: '1.2rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>Artículo</span> {article ? article : 'S/D'}
           </div>
         </div>
         <div className="row mt-5">
@@ -77,11 +80,14 @@ export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-6">
+          <div className="col-4">
             <span style={{ fontSize: '1.2rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>Marca:</span> {brand}
           </div>
-          <div className="col-6">
+          <div className="col-4">
             <span style={{ fontSize: '1.2rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>Modelo:</span> {model}
+          </div>
+          <div className="col-4">
+            <span style={{ fontSize: '1.2rem', textDecoration: 'underline', textUnderlineOffset: '3px' }}>Artículo:</span> {article ? article : 'S/D'}
           </div>
         </div>
         <div className="row mt-5">

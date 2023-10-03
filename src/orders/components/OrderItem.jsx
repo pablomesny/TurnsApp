@@ -6,7 +6,7 @@ import { startTagAsFinished } from "../../store/orders/thunks";
 import { PrintableOrder } from "./PrintableOrder";
 
 export const OrderItem = ({ order }) => {
-  const { name, lastName, phoneNumber, brand, model, defect, uniqueId = '', isFinished } = order;
+  const { name, lastName, phoneNumber, brand, model, article = '', defect, uniqueId = '', isFinished } = order;
 
   const dispatch = useDispatch();
 
@@ -66,6 +66,9 @@ export const OrderItem = ({ order }) => {
                   </div>
                   <div className="col-12 align-self-end">
                     <h4>Modelo: {model}</h4>
+                  </div>
+                  <div className="col-12 align-self-end">
+                    <h4>Artículo: {article ? article : 'S/D'}</h4>
                   </div>
                 </div>
               </div>

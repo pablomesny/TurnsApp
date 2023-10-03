@@ -146,6 +146,21 @@ export const ModalOrders = ({ initialState, isOpenModal, handleOpenModal, type }
 
               <div className="d-flex flex-row align-items-center w-100">
                 <label
+                  htmlFor="article"
+                >
+                  Artículo*
+                </label>
+                <input
+                  id='article'
+                  className="form-control w-50 ms-auto"
+                  type="text"
+                  name="article"
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="d-flex flex-row align-items-center w-100">
+                <label
                   htmlFor="defect"
                 >
                   Defecto*
