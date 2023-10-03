@@ -19,7 +19,7 @@ export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
   return (
     <div ref={componentRef}>
       <div className="container my-5 mx-5" style={{ height: '30vh', width: '100vw', position: 'relative' }}>
-        <div style={{ position: 'absolute', top: '20%', fontSize: '4rem', opacity: 0.1, fontFamily: 'Merriweather', textAlign: 'center' }}>
+        <div style={{ position: 'absolute', top: '20%', fontSize: '4rem', opacity: 0.4, fontFamily: 'Merriweather', textAlign: 'center' }}>
           ELECTRÓNICA MESNY
         </div>
         <div className="row mt-5">
