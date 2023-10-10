@@ -24,7 +24,7 @@ export const PrintableOrder = ({ order, handleClearOrderToPrint }) => {
         </div>
         <div className="row mt-5">
           <div className="col-12 font-bold fs-6" style={{ fontSize: '1.2rem', fontWeight: 800 }}>
-            ELECTRÓNICA MESNY - Necochea 3274 - Teléfono (342) - 6 980 774
+            ELECTRÓNICA MESNY - Necochea 3274 - Teléfono (342) - 6 310 969
           </div>
         </div>
         <div className="row mt-4">
